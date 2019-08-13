@@ -2,6 +2,8 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'senderEmail' => 'noreply@example.com',
-    'senderName' => 'Example.com mailer',
+    'senderEmail' => 'testforobivan@yandex.ru',
+    'senderEmailSubject' => 'Добавлена новая заявка',
+    'senderEmailBody' => '"Поступила заявка № "',
+    'receiverEmail'=> "andrew9727@mail.ru"
 ];

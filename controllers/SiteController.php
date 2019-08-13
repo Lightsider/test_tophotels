@@ -2,40 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\CustomOrderForm;
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
 
 class SiteController extends Controller
 {
     public $layout = '@app/views/layouts/site.php';
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * {@inheritdoc}
@@ -54,13 +27,37 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Отображение главной страницы
      *
      * @return string
      */
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * Путь для сохранения формы нестандартного заказа
+     *
+     * @return $this|\yii\web\Response
+     */
+    public function actionSendCustomForm()
+    {
+        $model = new CustomOrderForm();
+        if ($model->load(Yii::$app->request->post(),"")) {
+            if ($order = $model->saveOrder()) {
+
+                Yii::$app->mailer->compose()
+                    ->setTo( Yii::$app->params['receiverEmail'])
+                    ->setFrom(Yii::$app->params['senderEmail'])
+                    ->setSubject(Yii::$app->params['senderEmailSubject'])
+                    ->setTextBody(Yii::$app->params['senderEmailBody'].$order->id)
+                    ->send();
+                return $this->asJson(["status"=>"success"]);
+            }
+            else return $this->asJson(["status"=>"error"])->setStatusCode(400);
+        }
+        else return $this->asJson(["status"=>"fail"])->setStatusCode(500);
     }
 
 }

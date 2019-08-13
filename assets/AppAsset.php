@@ -20,10 +20,10 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        "/css/_lsfw/reset-ls.css?v=1544103235",
-        "/css/_lsfw/atom.css?v=1544103235",
-        "/css/_lsfw/fonts.css?v=1544103235",
-        "/css/_lsfw/tabs.css?v=1544103235",
+        "/css/_lsfw/reset-ls.css",
+        "/css/_lsfw/atom.css",
+        "/css/_lsfw/fonts.css",
+        "/css/_lsfw/tabs.css",
         "/css/vendor/font-awesome-5.0/css/fontawesome-all.css",
         "/css/vendor/sumoselect.css",
         "/css/vendor/th-sumoselect.css",
@@ -62,7 +62,6 @@ class AppAsset extends AssetBundle
         "/js/tophotels_site_html/header-mobile.js",
         "/js/tophotels_site_html/left-menu-mobile.js",
         "/js/tophotels_site_html/legal-info-pp.js",
-        "/assets/8f9331f6/yii.js",
         "/js/libs/array-function.js",
         "/js/libs/date-function.js",
         "/js/libs/number-function.js",
