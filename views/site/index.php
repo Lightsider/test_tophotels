@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Url;
+
 $this->title = 'TopHotels';
 ?>
 <div class="tour-selection-box">
@@ -10,7 +12,6 @@ $this->title = 'TopHotels';
             <div id="form" class="tab active">Нестандартный запрос</div>
             <div class="line" style="width: 186.828px"></div>
         </div>
-
         <div class="panel" id="formPanel">
             <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей поездки</div>
             <div class="tour-selection-wrap">

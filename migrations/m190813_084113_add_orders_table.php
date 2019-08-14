@@ -14,6 +14,8 @@ class m190813_084113_add_orders_table extends Migration
     {
         $this->createTable('orders',[
             'id' => $this->primaryKey(),
+            'created_at'=>$this->dateTime()->notNull(),
+            'direction' => $this->string(255)->null(),
             'name' => $this->string(255)->notNull(),
             'phone' => $this->string(255)->notNull(),
             'email' => $this->string(255)->null(),
@@ -26,23 +28,8 @@ class m190813_084113_add_orders_table extends Migration
      */
     public function safeDown()
     {
-        $this->delete("orders");
+        $this->dropTable("orders");
 
         return true;
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m190813_084113_add_orders_table cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

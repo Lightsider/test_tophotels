@@ -44,20 +44,24 @@ class SiteController extends Controller
     public function actionSendCustomForm()
     {
         $model = new CustomOrderForm();
-        if ($model->load(Yii::$app->request->post(),"")) {
+        if ($model->load(Yii::$app->request->post(), "")) {
             if ($order = $model->saveOrder()) {
 
-                Yii::$app->mailer->compose()
-                    ->setTo( Yii::$app->params['receiverEmail'])
+                Yii::$app->mailer->compose('order_mail', [
+                    'order' => $order,
+                ])
+                    ->setTo(Yii::$app->params['receiverEmail'])
                     ->setFrom(Yii::$app->params['senderEmail'])
                     ->setSubject(Yii::$app->params['senderEmailSubject'])
-                    ->setTextBody(Yii::$app->params['senderEmailBody'].$order->id)
+                    ->setTextBody(Yii::$app->params['senderEmailBody'] . $order->id)
                     ->send();
-                return $this->asJson(["status"=>"success"]);
+                return $this->asJson(["status" => "success"]);
+            } else {
+                return $this->asJson(["status" => "error"])->setStatusCode(400);
             }
-            else return $this->asJson(["status"=>"error"])->setStatusCode(400);
+        } else {
+            return $this->asJson(["status" => "fail"])->setStatusCode(500);
         }
-        else return $this->asJson(["status"=>"fail"])->setStatusCode(500);
     }
 
 }

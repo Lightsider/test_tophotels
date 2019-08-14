@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Faker\Provider\DateTime;
 use Yii;
 use yii\base\Model;
 
@@ -49,6 +50,7 @@ class CustomOrderForm extends Model
         }
         $order = new Orders();
 
+        $order->created_at = date("Y-m-d H:i:s");
         $order->name = $this->name;
         $order->phone = $this->phone;
         $order->email = $this->email;

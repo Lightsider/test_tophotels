@@ -8,6 +8,8 @@ use Yii;
  * This is the model class for table "orders".
  *
  * @property int $id
+ * @property string $created_at
+ * @property string $direction
  * @property string $name
  * @property string $phone
  * @property string $email
@@ -29,9 +31,9 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'phone'], 'required'],
+            [['name', 'phone','created_at'], 'required'],
             [['text'], 'string'],
-            [['name', 'phone', 'email'], 'string', 'max' => 255],
+            [['name', 'phone', 'email','direction'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,11 +43,13 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'phone' => 'Phone',
+            'id' => 'ID заявки',
+            'created_at'=>"Дата и время добавления",
+            'direction'=>"Направление",
+            'name' => 'Имя',
+            'phone' => 'Телефон',
             'email' => 'Email',
-            'text' => 'Text',
+            'text' => 'Доп. пожелание',
         ];
     }
 
