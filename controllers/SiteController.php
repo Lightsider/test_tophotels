@@ -49,6 +49,7 @@ class SiteController extends Controller
 
                 Yii::$app->mailer->compose('order_mail', [
                     'order' => $order,
+					'receiver' => Yii::$app->params['receiverEmail'],
                 ])
                     ->setTo(Yii::$app->params['receiverEmail'])
                     ->setFrom(Yii::$app->params['senderEmail'])

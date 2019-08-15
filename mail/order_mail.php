@@ -154,7 +154,7 @@ use yii\helpers\Url;
                     <tbody>
                     <tr>
                         <td style="font-family:Arial,sans-serif;font-size: 12px;line-height: 16px;color: #999999;text-align: center;padding: 30px 5px;">
-                            Это письмо отправлено на адрес <a href="mailto:<?php echo Html::encode($order->email)?>" target="_blank"><?php echo Html::encode($order->email)?></a>
+                            Это письмо отправлено на адрес <a href="mailto:<?php echo Html::encode($receiver)?>" target="_blank"><?php echo Html::encode($receiver)?></a>
                             автоматически.
                             При возникновении вопросов вы можете обратиться в <a href="https://tophotels.ru/feedback">техподдержку
                                 TopHotels</a>
