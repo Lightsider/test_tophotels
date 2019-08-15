@@ -148,10 +148,25 @@ $(document).ready(function () {
 
 //Добавляем и удаляем контролы
     $('.js-add-field').on('click', function () {
-        $('.js-show-added-field').show();
+        let elements = $('.js-show-added-field');
+        $.each(elements, function (key, element) {
+           if($(element).is(":hidden"))
+           {
+               $(element).show();
+               return false;
+           }
+        });
     });
     $('.js-del-field').on('click', function () {
-        $('.js-show-added-field').hide();
+        //$('.js-show-added-field').hide();
+        let elements = $('.js-show-added-field');
+        $.each(elements, function (key, element) {
+            if(!$(element).is(":hidden"))
+            {
+                $(element).hide();
+                return false;
+            }
+        });
     });
 
     $('.js-add-hotel ').on('click', function () {

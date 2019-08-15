@@ -45,7 +45,7 @@ $(document).ready(function () {
         $('.js-show-adults ').show();
     });
     $('.js-show-ages  ').on('click', function () {
-        $(this).closest('.formDirections__bottom-item ').hide();
+        //$(this).closest('.formDirections__bottom-item ').hide();
         $('.js-ages').show();
     });
     $('.formDirections__price-currency--sm').on('click', function () {

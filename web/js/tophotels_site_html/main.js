@@ -1,40 +1,9 @@
 jQuery(document).ready(function () {
 
-    $('.bth__loader').on('click', function () {
-        if (validateCustomForm())
-        {
-            $(this).addClass('bth__loader--animate');
-
-            let formdata = new FormData();
-            formdata.append("name",$("#name1").val());
-            formdata.append("phone",$("#phone1").val());
-            formdata.append("email",$("#mail3").val());
-            formdata.append("text",$("#parametrs").val());
-
-            $.ajax({
-                url: "/send-custom-form",
-                method: 'post',
-                data: formdata,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function (data) {
-                    $("#formpanel_success_message").css("display","block");
-                    $("#formPanel div:not(#formpanel_success_message)").css("display","none");
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-
-        }
-
+    $('.bth__loader').on('click', function (e) {
+        e.preventDefault();
     });
-    // $('button, .bth__btn').on('click', function () {
-    //     if ($())
-    //         $('.js-add-error').addClass('has-error');
-    //     $('.bth__inp-block-eye').hide();
-    // });
+
 //Подсказки для полей
     $('.bth__inp.js-stop-label').on('focus', function () {
         $(this).addClass('focus');
@@ -82,7 +51,68 @@ jQuery(document).ready(function () {
         $(this).closest('.bth__inp-block.long').removeClass('active');
     });
 
+    /** Конец примеров **/
 
+    //Смена таба
+    $("#js_to_step2").click(function (e) {
+        $('#step1Panel').hide();
+
+        $('#formPanel').hide();
+        $('.orders-back-hotels').hide();
+        $('#formStep2Panel').hide();
+        $('#step2Panel').show();
+        $('.step2Panel').show();
+
+        $('.orders-consultants').hide();
+        $('#form-fullPanel').hide();
+        $('#step3Panel').hide();
+        $('#step0Panel').hide();
+    });
+
+    // Отправка простой формы
+    $("#send_custom_form").click(function (e) {
+        if (validateCustomForm())
+        {
+            $(this).addClass('bth__loader--animate');
+
+            let formdata = new FormData();
+            formdata.append("name",$("#name1").val());
+            formdata.append("phone",$("#phone1").val());
+            formdata.append("email",$("#mail3").val());
+            formdata.append("text",$("#parametrs").val());
+
+            $.ajax({
+                url: "/send-custom-form",
+                method: 'post',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function (data) {
+                    $("#formpanel_success_message").css("display","block");
+                    $("#formPanel div:not(#formpanel_success_message)").css("display","none");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        }
+    })
+
+    // Отправка сложной формы
+    $("#send_hard_form").click(function (e) {
+        if(validateHardForm())
+        {
+            $(this).addClass('bth__loader--animate');
+
+            //ajax
+
+
+            $("#step2panel_success_message").css("display","block");
+            $("#step2Panel div:not(#step2panel_success_message)").css("display","none");
+        }
+    })
 });
 
 $(document).on('click', '.js-modal-close', function (e) {
@@ -91,7 +121,29 @@ $(document).on('click', '.js-modal-close', function (e) {
 });
 
 
-/* Валидации */
+/** Валидации **/
+
+function validateHardForm() {
+    var data = [$("#name3"), $("#phone3"), $("#mail2"),$("#choose_city")];
+    var rules = [
+        ["required"],
+        ["required"],
+        ["email"],
+        ["required"]
+    ];
+
+    let errors = validateData(data, rules);
+
+    if (errors.length != 0) {
+        $.each(errors, function (index, error) {
+            if(error !== undefined)
+                error.parent('.js-add-error').addClass('has-error');
+        });
+        return false;
+    }
+
+    return true;
+}
 
 /**
  * Валидация для формы нестандартного заказа
@@ -153,4 +205,4 @@ function validateEmail(email) {
     return pattern.test(email);
 }
 
-/* Конец валидаций */
+/** Конец валидаций **/

@@ -18,7 +18,8 @@
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
-        "kartik-v/yii2-widget-datetimepicker": "^1.4"
+        "kartik-v/yii2-widget-datetimepicker": "^1.4",
+        "lightsoft/lib-ui-tour-filter": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -33,6 +34,7 @@
     },
     "config": {
         "process-timeout": 1800,
+        "secure-http": false,
         "fxp-asset": {
             "enabled": false
         }
@@ -44,6 +46,12 @@
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
             "yii\\composer\\Installer::postInstall"
+        ],
+        "post-package-install": [
+            "LibUiTourFilter\\AfterInstallModel::postPackageInstall"
+        ],
+        "post-package-update": [
+            "LibUiTourFilter\\AfterInstallModel::postPackageInstall"
         ]
     },
     "extra": {
@@ -63,6 +71,13 @@
         }
     },
     "repositories": [
+        {
+            "type": "vcs",
+            "url": "svn://svn.tophotels.site/th/branches",
+            "trunk-path": false,
+            "branches-path": false,
+            "tags-path": "branches/lsfw"
+        },
         {
             "type": "composer",
             "url": "https://asset-packagist.org"

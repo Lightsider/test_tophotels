@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6aaf8067984c44d3956e52e6f0a78a9",
+    "content-hash": "32771b34f7ed1007789918fccf601d17",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -439,6 +439,33 @@
                 "yii2"
             ],
             "time": "2019-05-29T12:28:51+00:00"
+        },
+        {
+            "name": "lightsoft/lib-ui-tour-filter",
+            "version": "2.4.740",
+            "source": {
+                "type": "svn",
+                "url": "svn://svn.tophotels.site/th",
+                "reference": "/branches/lsfw/2.4.740/@72"
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "yiisoft/yii2": "^2.0.15"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LibUiTourFilter\\": "lib"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "виджеты для фильтров поиска цен и туров Yii2",
+            "support": {
+                "source": ""
+            },
+            "time": "2019-07-23T17:44:12+07:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
