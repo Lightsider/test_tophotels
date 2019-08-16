@@ -6,6 +6,7 @@
 
 use app\assets\AppAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 
@@ -21,7 +22,6 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <link rel="icon" href="/i/favicon.png">
     <?php $this->head() ?>
-    <!--    <script src="/js/jquery.311.min.js?v=1544103230"></script></head>-->
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -213,20 +213,20 @@ AppAsset::register($this);
 
 
                         <li class="header-nav-item">
-                            <a href="/tophotels/profile" class="header-nav-link grey ">Мой профиль</a>
+                            <a href="#" class="header-nav-link grey disabled">Мой профиль</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/hotels-catalog" class="header-nav-link grey">Отели</a>
+                            <a href="#" class="header-nav-link grey disabled">Отели</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/forum" class="header-nav-link grey">Клуб ТопХотелс</a>
+                            <a href="#" class="header-nav-link grey disabled">Клуб ТопХотелс</a>
                         </li>
                         <li class="header-nav-item active">
-                            <a href="/tophotels/help-selection" class="header-nav-link ">Помощь в подборе</a>
+                            <a href="<?=Url::to(["index"])?>" class="header-nav-link ">Помощь в подборе</a>
                         </li>
 
                         <li class="header-nav-item">
-                            <a href="/tophotels/review" class="header-nav-link  grey">Добавить отзыв</a>
+                            <a href="#" class="header-nav-link  grey disabled">Добавить отзыв</a>
                         </li>
 
 
@@ -235,25 +235,25 @@ AppAsset::register($this);
 
 
                         <li class="header-nav-item">
-                            <a href="/tophotels/profile" class="header-nav-link ">Мой профиль</a>
+                            <a href="#" class="header-nav-link ">Мой профиль</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/hotels-catalog" class="header-nav-link ">Отели</a>
+                            <a href="#" class="header-nav-link ">Отели</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/forum" class="header-nav-link ">Клуб ТопХотелс</a>
+                            <a href="#" class="header-nav-link ">Клуб ТопХотелс</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/help-selection" class="header-nav-link ">Помощь в подборе</a>
+                            <a href="<?=Url::to(["index"])?>" class="header-nav-link ">Помощь в подборе</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/review" class="header-nav-link ">Добавить отзыв</a>
+                            <a href="#" class="header-nav-link ">Добавить отзыв</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/hotel-description" class="header-nav-link ">Отель</a>
+                            <a href="#" class="header-nav-link ">Отель</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="/tophotels/cutaway" class="header-nav-link ">Турист</a>
+                            <a href="#" class="header-nav-link ">Турист</a>
                         </li>
 
 

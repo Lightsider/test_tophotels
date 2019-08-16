@@ -89,8 +89,9 @@ jQuery(document).ready(function () {
                 contentType: false,
                 dataType: "json",
                 success: function (data) {
-                    $("#formpanel_success_message").css("display","block");
-                    $("#formPanel div:not(#formpanel_success_message)").css("display","none");
+                    $("#success_message").css("display","block");
+                    $("#formPanel").css("display","none");
+                    clearCustomForm();
                 },
                 error: function (error) {
                     console.log(error);
@@ -98,7 +99,7 @@ jQuery(document).ready(function () {
             });
 
         }
-    })
+    });
 
     // Отправка сложной формы
     $("#send_hard_form").click(function (e) {
@@ -119,6 +120,17 @@ $(document).on('click', '.js-modal-close', function (e) {
     e.preventDefault();
     $.magnificPopup.close();
 });
+
+/** Функции работы с формами **/
+
+function clearCustomForm() {
+    var data = [$("#name1"), $("#phone1"), $("#mail3"),$("#parametrs")];
+    $.each(data, function (index, value) {
+        value.val("");
+    });
+}
+
+/** Конец функций работы с формами **/
 
 
 /** Валидации **/
@@ -152,8 +164,8 @@ function validateHardForm() {
 function validateCustomForm() {
     var data = [$("#name1"), $("#phone1"), $("#mail3")];
     var rules = [
-        ["required"],
-        ["required"],
+        ["required","letters"],
+        ["required","numbers"],
         ["email"]
     ];
 
@@ -188,6 +200,13 @@ function validateData(data, rules) {
                     break;
                 case "email":
                     if (!validateEmail(data[i].val()) && data[i].val().length > 0) errors[i] = data[i];
+                    break;
+                case "letters":
+                    if (!/^[a-zA-Zа-яА-Я]*$/.test(data[i].val())) errors[i] = data[i];
+                    break;
+                case "numbers":
+                    if (!/^[0-9]*$/.test(data[i].val())) errors[i] = data[i];
+                    break;
             }
         });
     }

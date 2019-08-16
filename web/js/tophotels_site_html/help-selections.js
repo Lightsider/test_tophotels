@@ -3,6 +3,8 @@ $(document).ready(function () {
     $('#step1').click(function () {
         line($(this));
         _hashState('#step1');
+        $("#success_message").css("display","none");
+        $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').show();
         $('#formPanel').hide();
         $('#step2Panel').hide();
@@ -18,8 +20,11 @@ $(document).ready(function () {
     $('#form').click(function () {
         line($(this));
         _hashState('#form');
+        $("#success_message").css("display","none");
+        $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
         $('#formPanel').show();
+
         $('#step2Panel').hide();
         $('.step2Panel').hide();
         $('#formStep2Panel').hide();
@@ -29,10 +34,14 @@ $(document).ready(function () {
         $('#form-fullPanel').hide();
         $('#step3Panel').hide();
         $('#step0Panel').hide();
+
+
     });
     $('#formStep2').click(function () {
         line($(this));
         _hashState('#formStep2');
+        $("#success_message").css("display","none");
+        $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
         $('#formPanel').hide();
         $('#step2Panel').hide();
@@ -47,6 +56,8 @@ $(document).ready(function () {
     $('#step2').click(function () {
         line($(this));
         _hashState('#step2');
+        $("#success_message").css("display","none");
+        $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
         $('#formPanel').hide();
@@ -64,6 +75,8 @@ $(document).ready(function () {
     $('#form-full').click(function () {
         line($(this));
         _hashState('#form-full');
+        $("#success_message").css("display","none");
+        $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
         $('#formPanel').hide();
@@ -79,6 +92,8 @@ $(document).ready(function () {
     $('#step3').click(function () {
         line($(this));
         _hashState('#step3');
+        $("#success_message").css("display","none");
+        $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
         $('#formPanel').hide();
@@ -94,6 +109,8 @@ $(document).ready(function () {
     $('#step0').click(function () {
         line($(this));
         _hashState('#step0');
+        $("#success_message").css("display","none");
+        $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
         $('#formPanel').hide();
