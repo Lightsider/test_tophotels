@@ -23,15 +23,6 @@ class AdminController extends Controller
         else return false;
     }
 
-//    public function beforeAction($action)
-//    {
-//        if(!User::isAdmin())
-//        {
-//            return $this->redirect(['game/login']);
-//        }
-//        return parent::beforeAction($action);
-//    }
-
     public function behaviors()
     {
         return [
@@ -41,16 +32,6 @@ class AdminController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'only' => ['create', 'update', 'delete','index','view'],
-//                'rules' => [
-//                    [
-//                        'allow' => true,
-//                        'roles' => ['admin'],
-//                    ],
-//                ],
-//            ],
         ];
     }
 }

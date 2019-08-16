@@ -78,7 +78,7 @@ use yii\helpers\Url;
                                 <tr>
                                     <td style="font: 15px Arial, sans-serif;line-height: 20px;padding: 0 15px 5px;">
                                         Ваш клиент:
-                                        <a href="#" target="_blank"
+                                        <a href="<?php echo Url::to(['@web/admin/order'],true)?>" target="_blank"
                                            style="-webkit-text-size-adjust:none;font: 15px Arial, sans-serif;line-height: 20px;color: #318cc6;text-decoration: none;">
                                             <?php echo Html::encode($order->name)?>
                                         </a>
@@ -87,7 +87,7 @@ use yii\helpers\Url;
                                 <tr>
                                     <td style="font: 15px Arial, sans-serif;line-height: 20px;padding: 0 15px 5px;">
                                         Телефон:
-                                        <a href="#" target="_blank"
+                                        <a href="<?php echo Url::to(['@web/admin/order'],true)?>" target="_blank"
                                            style="-webkit-text-size-adjust:none;font: 15px Arial, sans-serif;line-height: 20px;color: #000000;text-decoration: none;">
                                             <?php echo Html::encode($order->phone)?>
                                         </a>

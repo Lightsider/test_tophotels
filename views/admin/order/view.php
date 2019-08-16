@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -35,7 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'phone',
             'email:email',
-            'text:text',
+            [
+                'attribute' => 'text',
+                'format' => 'text',
+                'value' => function ($model) {
+                    return StringHelper::truncate($model->text, 100);
+                }
+            ],
         ],
     ]) ?>
 

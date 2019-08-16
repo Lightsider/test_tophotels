@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -29,7 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'phone',
             'email:email',
-            'text:text',
+            [
+                'attribute' => 'text',
+                'format' => 'text',
+                'value' => function ($model) {
+                    return StringHelper::truncate($model->text, 40);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
