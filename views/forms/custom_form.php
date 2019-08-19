@@ -1,4 +1,4 @@
-<div class="panel" id="formPanel">
+<div class="panel" id="formPanel" style="display: none">
     <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей поездки</div>
     <div class="tour-selection-wrap">
         <div class="tour-selection-wrap-in">

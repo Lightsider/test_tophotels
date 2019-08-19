@@ -2,8 +2,13 @@
 
 namespace app\controllers;
 
+use app\jobs\MailDelayJob;
 use app\models\CustomOrderForm;
+use app\models\HardOrderFormOneStep;
+use app\models\HardOrderFormTwoStep;
+use app\models\Orders;
 use Yii;
+use yii\queue\Queue;
 use yii\web\Controller;
 
 class SiteController extends Controller
@@ -47,21 +52,62 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post(), "")) {
             if ($order = $model->saveOrder()) {
 
-                Yii::$app->mailer->compose('order_mail', [
-                    'order' => $order,
-					'receiver' => Yii::$app->params['receiverEmail'],
-                ])
-                    ->setTo(Yii::$app->params['receiverEmail'])
-                    ->setFrom(Yii::$app->params['senderEmail'])
-                    ->setSubject(Yii::$app->params['senderEmailSubject'])
-                    ->setTextBody(Yii::$app->params['senderEmailBody'] . $order->id)
-                    ->send();
+                $order->sendEmailNotification();
                 return $this->asJson(["status" => "success"]);
             } else {
-                return $this->asJson(["status" => "error"])->setStatusCode(400);
+                return $this->asJson(["status" => "error"])->setStatusCode(500);
             }
         } else {
-            return $this->asJson(["status" => "fail"])->setStatusCode(500);
+            return $this->asJson(["status" => "fail"])->setStatusCode(400);
+        }
+    }
+
+    /**
+     * Путь для сохранения сложной формы на первом шаге
+     *
+     * @return $this|\yii\web\Response
+     */
+    public function actionSendHardFormOneStep()
+    {
+        $model = new HardOrderFormOneStep();
+        if ($model->load(Yii::$app->getRequest()->getBodyParams(), '')) {
+            if ($order = $model->saveOrder()) {
+
+                Yii::$app->queue->delay(2 * 60)->push(new MailDelayJob([
+                    'order' => $order,
+                ]));
+                Yii::$app->queue->on(Queue::EVENT_BEFORE_EXEC, function ($event) {
+                    $queue = $event->sender;
+                    $order = Orders::find()->where('id = :id', [':id' => $event->job->getOrder()->id])->one();
+                    $event->job->setOrder($order);
+                    $queue->push($event->job);
+                });
+
+                return $this->asJson(["status" => "success","id" => $order->id]);
+            } else {
+                return $this->asJson(["status" => "error"])->setStatusCode(500);
+            }
+        } else {
+            return $this->asJson(["status" => "fail"])->setStatusCode(400);
+        }
+    }
+
+    /**
+     * Путь для сохранения сложной формы на втором шаге
+     *
+     * @return $this|\yii\web\Response
+     */
+    public function actionSendHardFormTwoStep()
+    {
+        $model = new HardOrderFormTwoStep();
+        if ($model->load(Yii::$app->request->post(), "")) {
+            if ($order = $model->saveOrder()) {
+                return $this->asJson(["status" => "success"]);
+            } else {
+                return $this->asJson(["status" => "error"])->setStatusCode(500);
+            }
+        } else {
+            return $this->asJson(["status" => "fail"])->setStatusCode(400);
         }
     }
 

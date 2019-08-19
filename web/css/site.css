@@ -114,6 +114,7 @@ a.desc:after {
     outline: none;
 }
 
-a.disabled {
+.disabled {
+    color: grey;
     pointer-events: none;
 }

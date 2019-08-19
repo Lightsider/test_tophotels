@@ -6,12 +6,13 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'queue'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@tests' => '@app/tests',
+        '@web' => '@app/web'
     ],
     'components' => [
         'cache' => [
@@ -26,15 +27,47 @@ $config = [
             ],
         ],
         'db' => $db,
-    ],
-    'params' => $params,
-    /*
-    'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'db' => 'db',
+            'tableName' => '{{%queue}}',
+            'channel' => 'default',
+            'mutex' => 'yii\mutex\FileMutex',
+        ],
+        'urlManager' => [
+            'baseUrl' => 'http://localhost:8080/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '/' => 'site/index',
+                'send-custom-form' => 'site/send-custom-form',
+                'send-hard-form-one-step' => 'site/send-hard-form-one-step',
+                'send-hard-form-two-step' => 'site/send-hard-form-two-step',
+            ],
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'testforobivan@yandex.ru',
+                'password' => 'd237rewy7',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
         ],
     ],
-    */
+    'params' => $params,
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => null,
+            'migrationNamespaces' => [
+                'yii\queue\db\migrations',
+            ],
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {

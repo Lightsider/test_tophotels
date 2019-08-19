@@ -9,12 +9,12 @@ $this->title = 'TopHotels';
 <div class="tour-selection-box">
     <div class="tabs-block">
         <div class="tabs-bar   tabs-bar--responsive js-768-tabs">
-<!--            <div id="step1" class="tab active">Подобрать тур</div>-->
-            <div id="form" class="tab active">Нестандартный запрос</div>
-            <div class="line" style="width: 186.828px"></div>
+            <div id="step1" class="tab active">Подобрать тур</div>
+            <div id="form" class="tab">Нестандартный запрос</div>
+            <div class="line" style="width: 117.812px"></div>
         </div>
         <?= $this->render('../forms/custom_form'); ?>
-        <?php /*= $this->render('../forms/hard_form'); Начало 4 задания*/?>
+        <?=$this->render('../forms/hard_form');?>
         <div class="panel" id="success_message" style="display: none">
             <div class="bth__cnt fz18 bold">
                 Спасибо, Ваша заявка отправлена и будет обработана в ближайшее время.
@@ -40,113 +40,113 @@ $this->title = 'TopHotels';
                     <div class="side-nav">
                         <ul class="side-nav-ul">
                             <li class="side-nav-li pt10">
-                                <div class="side-nav-li-a side-nav-li-a--del-arr ">Главная</div>
+                                <div class="side-nav-li-a side-nav-li-a--del-arr disabled">Главная</div>
                             </li>
                             <li class="side-nav-li">
                                 <a href="#my-profile"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor ">Мой
+                                   class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor disabled">Мой
                                     профиль</a>
                             </li>
                             <li class="side-nav-li">
                                 <a href="#catalog"
-                                   class="side-nav-li-a side-nav-li-a--del-arr js-left-menu-1023-anchor  ">Каталог
+                                   class="side-nav-li-a side-nav-li-a--del-arr js-left-menu-1023-anchor  disabled">Каталог
                                     отелей</a>
                             </li>
                             <li class="side-nav-li">
                                 <a href="#club-tx"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor">Клуб
+                                   class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor disabled">Клуб
                                     ТопХотелс</a>
                             </li>
                             <li class="side-nav-li">
                                 <a href="#help-selection"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor ">Помощь в
+                                   class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor disabled">Помощь в
                                     подборе</a>
                             </li>
                             <li class="side-nav-li">
                                 <a href="#add-review"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor">Добавить
+                                   class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor disabled">Добавить
                                     отзыв</a>
                             </li>
                             <li class="side-nav-li">
                                 <a href="#features"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor">О
+                                   class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor disabled">О
                                     проекте</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="left-menu-1023__item">
-                    <a id="my-profile" class="left-menu-1023__ttl">Мой профиль</a>
+                    <a id="my-profile" class="left-menu-1023__ttl disabled">Мой профиль</a>
 
                     <div class="side-nav">
 
                         <ul class="side-nav-ul">
-                            <li class="side-nav-li side-nav-li-ttl">Моё участие</li>
+                            <li class="side-nav-li side-nav-li-ttl disabled">Моё участие</li>
                             <li class="side-nav-li">
-                                <div class="side-nav-li-a ">Визитка</div>
+                                <div class="side-nav-li-a disabled">Визитка</div>
 
                                 <ul class="side-nav-li__tabs-list">
                                     <li class="side-nav-li__tabs-li">
-                                        <a href="/tophotels/profile-cutaway#authorization">Визитка</a>
+                                        <a href="#" class="disabled">Визитка</a>
                                     </li>
 
-                                    <li class="side-nav-li__tabs-li">
-                                        <a href="/tophotels/profile-cutaway#hotels"> Подборки и предложения</a>
+                                    <li class="side-nav-li__tabs-li ">
+                                        <a href="#" class="disabled"> Подборки и предложения</a>
                                     </li>
                                     <li class="side-nav-li__tabs-li">
-                                        <a href="/tophotels/profile-cutaway#recomend"> Меня рекомендуют</a>
+                                        <a href="#" class="disabled"> Меня рекомендуют</a>
                                     </li>
                                     <li class="side-nav-li__tabs-li">
-                                        <a href="/tophotels/profile-cutaway#sertificate">Сертификаты</a>
+                                        <a href="#" class="disabled">Сертификаты</a>
                                     </li>
                                 </ul>
                             </li>
 
                             <li class="side-nav-li">
-                                <a href="/tophotels/profile" class="side-nav-li-a">Профиль</a>
+                                <a href="#" class="side-nav-li-a disabled">Профиль</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/tape-my-actions" class="side-nav-li-a ">Лента моих действий</a>
+                                <a href="#" class="side-nav-li-a disabled">Лента моих действий</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/my-travels" class="side-nav-li-a ">Мои путешествия</a>
+                                <a href="#" class="side-nav-li-a disabled">Мои путешествия</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/my-progress" class="side-nav-li-a ">Достижения</a>
+                                <a href="#" class="side-nav-li-a disabled">Достижения</a>
 
                             </li>
                         </ul>
                         <ul class="side-nav-ul">
-                            <li class="side-nav-li side-nav-li-ttl">Коммуникации</li>
-                            <li class="side-nav-li ">
-                                <a href="/tophotels/log-all-messages" class="side-nav-li-a">Лог всех сообщений</a>
+                            <li class="side-nav-li side-nav-li-ttl disabled">Коммуникации</li>
+                            <li class="side-nav-li disabled">
+                                <a href="#" class="side-nav-li-a disabled">Лог всех сообщений</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/my-subscription-hotels" class="side-nav-li-a ">Мои подписки на
+                                <a href="#" class="side-nav-li-a disabled">Мои подписки на
                                     отели</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/tape-communication" class="side-nav-li-a ">Лента общения</a>
+                                <a href="#" class="side-nav-li-a disabled">Лента общения</a>
 
                             </li>
                         </ul>
                         <ul class="side-nav-ul">
-                            <li class="side-nav-li side-nav-li-ttl">Настройка интересов</li>
+                            <li class="side-nav-li side-nav-li-ttl disabled">Настройка интересов</li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/personal-data" class="side-nav-li-a ">Персональные данные</a>
+                                <a href="#" class="side-nav-li-a disabled">Персональные данные</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/my-preference" class="side-nav-li-a">Мои предпочтения</a>
+                                <a href="#" class="side-nav-li-a disabled">Мои предпочтения</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/my-connections" class="side-nav-li-a ">Мои контакты</a>
+                                <a href="#" class="side-nav-li-a disabled">Мои контакты</a>
 
                             </li>
                         </ul>
@@ -155,31 +155,31 @@ $this->title = 'TopHotels';
                 </div>
 
                 <div class="left-menu-1023__item">
-                    <a id="catalog" class="left-menu-1023__ttl">Каталог отелей</a>
+                    <a id="catalog" class="left-menu-1023__ttl disabled">Каталог отелей</a>
 
                     <div class="side-nav">
 
                         <ul class="side-nav-ul">
                             <li class="side-nav-li pt10">
-                                <a href="/tophotels/hotels-catalog#hotelFilter"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr ">Фильтр</a>
+                                <a href="#"
+                                   class="side-nav-li-a  side-nav-li-a--del-arr disabled">Фильтр</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/hotels-catalog#hotelSearch"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr ">
+                                <a href="#"
+                                   class="side-nav-li-a  side-nav-li-a--del-arr disabled">
                                     Поиск отеля</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/hotels-catalog#myInterests"
-                                   class="side-nav-li-a   side-nav-li-a--del-arr">
+                                <a href="#"
+                                   class="side-nav-li-a   side-nav-li-a--del-arr disabled">
                                     Мои интересы</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/hotels-catalog#hotelChains"
-                                   class="side-nav-li-a   side-nav-li-a--del-arr">
+                                <a href="#"
+                                   class="side-nav-li-a   side-nav-li-a--del-arr disabled">
                                     Сети отелей</a>
 
                             </li>
@@ -191,70 +191,70 @@ $this->title = 'TopHotels';
 
 
                 <div class="left-menu-1023__item">
-                    <a id="club-tx" class="left-menu-1023__ttl">Клуб ТопХотелс</a>
+                    <a id="club-tx" class="left-menu-1023__ttl disabled">Клуб ТопХотелс</a>
 
                     <div class="side-nav">
 
                         <ul class="side-nav-ul">
-                            <li class="side-nav-li side-nav-li-ttl">Сообщество</li>
+                            <li class="side-nav-li side-nav-li-ttl disabled">Сообщество</li>
                             <li class="side-nav-li ">
-                                <a href="#" class="side-nav-li-a grey">Лента клуба</a>
+                                <a href="#" class="side-nav-li-a grey disabled">Лента клуба</a>
                             </li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/forum" class="side-nav-li-a">Форум по отелям </a>
+                                <a href="#" class="side-nav-li-a disabled">Форум по отелям </a>
 
                             </li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/hotline" class="side-nav-li-a ">Спецакции отелей</a>
-
-                            </li>
-                            <li class="side-nav-li">
-                                <a href="/tophotels/club-vote" class="side-nav-li-a ">Опросы</a>
+                                <a href="#" class="side-nav-li-a disabled">Спецакции отелей</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="#" class="side-nav-li-a grey">Конкурсы и игры</a>
+                                <a href="#" class="side-nav-li-a disabled">Опросы</a>
+
+                            </li>
+                            <li class="side-nav-li">
+                                <a href="#" class="side-nav-li-a grey disabled">Конкурсы и игры</a>
 
                             </li>
                         </ul>
                         <ul class="side-nav-ul">
-                            <li class="side-nav-li side-nav-li-ttl">Рейтинги</li>
+                            <li class="side-nav-li side-nav-li-ttl disabled">Рейтинги</li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/ratings-nominations" class="side-nav-li-a ">Номинации отелей</a>
+                                <a href="#" class="side-nav-li-a disabled">Номинации отелей</a>
 
                             </li>
                             <li class="side-nav-li ">
-                                <a href="#" class="side-nav-li-a ">Рейтинг номеров</a>
+                                <a href="#" class="side-nav-li-a disabled">Рейтинг номеров</a>
                             </li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/top-users" class="side-nav-li-a ">ТОП участников </a>
+                                <a href="#" class="side-nav-li-a disabled">ТОП участников </a>
 
                             </li>
                         </ul>
                         <ul class="side-nav-ul">
                             <li class="side-nav-li side-nav-li-ttl">Участники</li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/who-where-when" class="side-nav-li-a ">Кто Где Когда</a>
+                                <a href="#" class="side-nav-li-a disabled">Кто Где Когда</a>
 
                             </li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/club-traveler-list" class="side-nav-li-a ">Путешественники</a>
+                                <a href="#" class="side-nav-li-a disabled">Путешественники</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/club-touragent-list" class="side-nav-li-a ">ПРО Турагенты</a>
+                                <a href="#" class="side-nav-li-a disabled">ПРО Турагенты</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="#" class="side-nav-li-a grey">Индивидуальные гиды</a>
+                                <a href="#" class="side-nav-li-a grey disabled">Индивидуальные гиды</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="#" class="side-nav-li-a grey">Отельеры</a>
+                                <a href="#" class="side-nav-li-a grey disabled">Отельеры</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/hotels-communities" class="side-nav-li-a ">Сообщества отелей</a>
+                                <a href="#" class="side-nav-li-a disabled">Сообщества отелей</a>
 
                             </li>
                         </ul>
@@ -271,20 +271,20 @@ $this->title = 'TopHotels';
 
                         <ul class="side-nav-ul">
                             <li class="side-nav-li pt10">
-                                <a href="/tophotels/help-selection#step1"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr ">Параметры
+                                <a href="#"
+                                   class="side-nav-li-a  side-nav-li-a--del-arr disabled">Параметры
                                     тура</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/help-selection#form" class="side-nav-li-a  side-nav-li-a--del-arr">
+                                <a href="#" class="side-nav-li-a  side-nav-li-a--del-arr disabled">
                                     Простая
                                     форма</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/help-selection#formStep2"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr ">Рега</a>
+                                <a href="#"
+                                   class="side-nav-li-a  side-nav-li-a--del-arr disabled">Рега</a>
 
                             </li>
 
@@ -300,18 +300,18 @@ $this->title = 'TopHotels';
 
                         <ul class="side-nav-ul">
                             <li class="side-nav-li pt10">
-                                <a href="/tophotels/review#search" class="side-nav-li-a   side-nav-li-a--del-arr">Добавление
+                                <a href="#" class="side-nav-li-a   side-nav-li-a--del-arr disabled">Добавление
                                     отзыва</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="/tophotels/review#older" class="side-nav-li-a  side-nav-li-a--del-arr">Черновики
+                                <a href="#" class="side-nav-li-a  side-nav-li-a--del-arr disabled">Черновики
                                     (14)</a>
 
                             </li>
 
                             <li class="side-nav-li">
-                                <a href="/tophotels/review#no-hotel" class="side-nav-li-a  side-nav-li-a--del-arr">Нет
+                                <a href="#" class="side-nav-li-a  side-nav-li-a--del-arr disabled">Нет
                                     отеля на
                                     ТопХотелс</a>
 
@@ -328,15 +328,15 @@ $this->title = 'TopHotels';
                         <ul class="side-nav-ul">
                             <li class="side-nav-li side-nav-li-ttl">Путешественникам</li>
                             <li class="side-nav-li">
-                                <a href="#" class="side-nav-li-a ">Отдых с ТопХотелс</a>
+                                <a href="#" class="side-nav-li-a disabled">Отдых с ТопХотелс</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="#" class="side-nav-li-a ">Полезные фишки</a>
+                                <a href="#" class="side-nav-li-a disabled">Полезные фишки</a>
 
                             </li>
                             <li class="side-nav-li">
-                                <a href="#" class="side-nav-li-a ">Все возможности</a>
+                                <a href="#" class="side-nav-li-a disabled">Все возможности</a>
 
                             </li>
 
@@ -347,19 +347,19 @@ $this->title = 'TopHotels';
                             <li class="side-nav-li side-nav-li-ttl">Для бизнеса</li>
 
                             <li class="side-nav-li ">
-                                <a href="/tophotels/api-services" class="side-nav-li-a ">API сервисы</a>
+                                <a href="#" class="side-nav-li-a disabled">API сервисы</a>
 
                             </li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/promotion-hotel" class="side-nav-li-a ">Продвижение отеля</a>
+                                <a href="#" class="side-nav-li-a disabled">Продвижение отеля</a>
 
                             </li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/touragent-profile" class="side-nav-li-a ">Профиль турагента</a>
+                                <a href="#" class="side-nav-li-a disabled">Профиль турагента</a>
 
                             </li>
                             <li class="side-nav-li ">
-                                <a href="/tophotels/media-ad" class="side-nav-li-a ">Медийная реклама</a>
+                                <a href="#" class="side-nav-li-a disabled">Медийная реклама</a>
 
                             </li>
 
@@ -368,22 +368,22 @@ $this->title = 'TopHotels';
                             <li class="side-nav-li side-nav-li-ttl">Информация</li>
 
                             <li class="side-nav-li ">
-                                <a href="/tophotels/about-project" class="side-nav-li-a ">О проекте</a>
+                                <a href="#" class="side-nav-li-a disabled">О проекте</a>
 
                             </li>
 
                             <li class="side-nav-li ">
-                                <a href="/tophotels/terms-use" class="side-nav-li-a ">Правила пользования</a>
+                                <a href="#" class="side-nav-li-a disabled">Правила пользования</a>
 
                             </li>
 
                             <li class="side-nav-li ">
-                                <a href="/tophotels/job-and-career" class="side-nav-li-a ">Работа и карьера </a>
+                                <a href="#" class="side-nav-li-a disabled">Работа и карьера </a>
 
                             </li>
 
                             <li class="side-nav-li ">
-                                <a href="/tophotels/feedback" class="side-nav-li-a">Обратная связь</a>
+                                <a href="#" class="side-nav-li-a disabled">Обратная связь</a>
 
                             </li>
 

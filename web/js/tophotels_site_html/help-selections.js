@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#step1').click(function () {
         line($(this));
         _hashState('#step1');
-        $("#success_message").css("display","none");
+        $("#success_message").hide();
         $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').show();
         $('#formPanel').hide();
@@ -20,7 +20,7 @@ $(document).ready(function () {
     $('#form').click(function () {
         line($(this));
         _hashState('#form');
-        $("#success_message").css("display","none");
+        $("#success_message").hide();
         $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
         $('#formPanel').show();
@@ -40,7 +40,7 @@ $(document).ready(function () {
     $('#formStep2').click(function () {
         line($(this));
         _hashState('#formStep2');
-        $("#success_message").css("display","none");
+        $("#success_message").hide();
         $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
         $('#formPanel').hide();
@@ -56,7 +56,7 @@ $(document).ready(function () {
     $('#step2').click(function () {
         line($(this));
         _hashState('#step2');
-        $("#success_message").css("display","none");
+        $("#success_message").hide();
         $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
@@ -75,7 +75,7 @@ $(document).ready(function () {
     $('#form-full').click(function () {
         line($(this));
         _hashState('#form-full');
-        $("#success_message").css("display","none");
+        $("#success_message").hide();
         $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
@@ -92,7 +92,7 @@ $(document).ready(function () {
     $('#step3').click(function () {
         line($(this));
         _hashState('#step3');
-        $("#success_message").css("display","none");
+        $("#success_message").hide();
         $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
@@ -109,7 +109,7 @@ $(document).ready(function () {
     $('#step0').click(function () {
         line($(this));
         _hashState('#step0');
-        $("#success_message").css("display","none");
+        $("#success_message").hide();
         $('.bth__loader').removeClass("bth__loader--animate");
         $('#step1Panel').hide();
 
@@ -123,6 +123,43 @@ $(document).ready(function () {
         $('#step3Panel').hide();
         $('#step0Panel').show();
     });
+
+    // Переход ко второму шагу
+    $("#js_to_step2").click(function (e) {
+        $(this).addClass("bth__loader--animate");
+        let object = lsfw.ui.main.request;
+        object.wh = $("#wishes").text();
+        //ajax
+        $.ajax({
+            url: "/send-hard-form-one-step",
+            type: 'post',
+            data: JSON.stringify(object),
+            contentType : 'application/json',
+            dataType: "json",
+            success: function (data) {
+
+                $('#step1Panel').hide();
+                $('#formPanel').hide();
+                $('.orders-back-hotels').hide();
+                $('#formStep2Panel').hide();
+                $('#step2Panel').show();
+                $('.step2Panel').show();
+
+                $('.orders-consultants').hide();
+                $('#form-fullPanel').hide();
+                $('#step3Panel').hide();
+                $('#step0Panel').hide();
+
+                $("#id_order_input").val(data.id);
+            },
+            error: function (error) {
+                console.log(error);
+                alert("Произошла ошибка, попробуйте позже");
+            }
+        });
+
+    });
+
     var line = function (obj) {
         var w = obj.width();
         var p = obj.position().left;
@@ -167,23 +204,16 @@ $(document).ready(function () {
     $('.js-add-field').on('click', function () {
         let elements = $('.js-show-added-field');
         $.each(elements, function (key, element) {
-           if($(element).is(":hidden"))
-           {
-               $(element).show();
-               return false;
-           }
-        });
-    });
-    $('.js-del-field').on('click', function () {
-        //$('.js-show-added-field').hide();
-        let elements = $('.js-show-added-field');
-        $.each(elements, function (key, element) {
-            if(!$(element).is(":hidden"))
-            {
-                $(element).hide();
+            if ($(element).is(":hidden")) {
+                $(element).show();
                 return false;
             }
         });
+        updateRequestObject()
+    });
+    $('.js-del-field').on('click', function () {
+        $(this).parents(".js-show-added-field").hide();
+        updateRequestObject()
     });
 
     $('.js-add-hotel ').on('click', function () {
@@ -196,7 +226,7 @@ $(document).ready(function () {
 
 
 //Направление города
-    var sumoDirectionCity= $('select[id="sumo-direction-city"]');
+    var sumoDirectionCity = $('select[id="sumo-direction-city"]');
     sumoDirectionCity.SumoSelect({
         search: true,
         forceCustomRendering: true
@@ -204,15 +234,60 @@ $(document).ready(function () {
     sumoDirectionCity.parent().addClass('open');
     sumoDirectionCity.next().next().css('top', '0').css('position', 'relative');
 
+    sumoDirectionCity.change(function () {
+        // Общие переменные
+        let value = $(this).val();
+        let select_city =  $(this).parents(".tour-selection-wrap-in").find("#select_city");
+        select_city.find(".bth__inp").text(value);
+
+        updateRequestObject();
+    });
+
 
 //Направление
-    var sumoDirection= $('select[id="sumo-direction"]');
+    var sumoDirection = $('select[id="sumo-direction"]');
     sumoDirection.SumoSelect({
         search: true,
         forceCustomRendering: true
     });
     sumoDirection.parent().addClass('open');
     sumoDirection.next().next().css('top', '0').css('position', 'relative');
+
+    sumoDirection.change(function () {
+        // Общие переменные
+        let value = $(this).val();
+        let select_country = $(this).parents(".tour-selection-wrap-in").find("#select_country");
+        let sumo_direction_city = $(this).parents(".tour-selection-wrap-in").find("#sumo-direction-city");
+        let country_for_city_select = $(this).parents(".tour-selection-wrap-in").find("#country_for_city_select");
+        let select_city = $(this).parents(".tour-selection-wrap-in").find("#select_city");
+
+        // Работа со странами
+        if (select_country.hasClass("bth__inp-block")) {
+            select_country.removeClass("bth__inp-block").addClass("bth__inp").addClass("tour-selection__country");
+            select_country.find(".bth__inp-lbl").remove();
+            select_country.find(".bth__inp").text(value);
+            select_country.find(".bth__inp").removeClass().addClass("tour-selection__country-cut");
+            select_country.parent("div").prepend("<span class=\"bth__inp-lbl bth__inp-lbl--center active\">Страна поездки</span>")
+        }
+        else {
+            select_country.find(".tour-selection__flag").remove();
+            select_country.find(".tour-selection__country-cut").text(value);
+        }
+        select_country.prepend("<div class=\"tour-selection__flag lsfw-flag lsfw-flag-" + $(this)
+            .find("option:selected").data("val") + "\"></div>");
+
+        // Работа с городами
+        $(this).parents(".tour-selection-wrap-in").find("#country_selected").show();
+        $(this).parents(".tour-selection-wrap-in").find("#country_not_selected").hide();
+        country_for_city_select.text(value);
+        sumo_direction_city.parents(".open").find("ul").find('li').hide();
+        sumo_direction_city.parents(".open").find("ul").find('li[data-val=' + $(this).find("option:selected").data("val") + ']').show();
+        select_city.find(".bth__inp").text("Не важно");
+        sumoDirectionCity.val("");
+
+        //Сохранение значений
+        updateRequestObject();
+    });
 
 
 //Список городов вылета
@@ -224,6 +299,17 @@ $(document).ready(function () {
     sumoListCity.parent().addClass('open');
     sumoListCity.next().next().css('top', '0').css('position', 'relative');
 
+    sumoListCity.change(function () {
+        // Общие переменные
+        let value = $(this).val();
+        let select_list_city =  $(this).parents(".tour-selection-wrap-in").find("#select_list_city");
+        select_list_city.find(".bth__inp-lbl").addClass("active");
+        select_list_city.find("b.uppercase").text(value);
+
+        updateRequestObject();
+    });
+
+
 
 //Город вылета
     var sumoDepartment = $('select[id="sumo-department"]');
@@ -233,6 +319,15 @@ $(document).ready(function () {
     });
     sumoDepartment.parent().addClass('open');
     sumoDepartment.next().next().css('top', '0').css('position', 'relative');
+
+    sumoDepartment.change(function () {
+        // Общие переменные
+        let value = $(this).val();
+        let select_department =  $(this).parents(".tour-selection-wrap-in").find("#select_department");
+        select_department.find(".bth__inp").text(value);
+
+        updateRequestObject();
+    });
 
     var formDateHelp1 = new mytour.searchTours.formDate({
         pickerBlockId: 'js-mt-filter-dtHelp1',

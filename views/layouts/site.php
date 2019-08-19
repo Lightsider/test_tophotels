@@ -235,25 +235,25 @@ AppAsset::register($this);
 
 
                         <li class="header-nav-item">
-                            <a href="#" class="header-nav-link ">Мой профиль</a>
+                            <a href="#" class="header-nav-link disabled">Мой профиль</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="#" class="header-nav-link ">Отели</a>
+                            <a href="#" class="header-nav-link disabled">Отели</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="#" class="header-nav-link ">Клуб ТопХотелс</a>
+                            <a href="#" class="header-nav-link disabled">Клуб ТопХотелс</a>
                         </li>
                         <li class="header-nav-item">
                             <a href="<?=Url::to(["index"])?>" class="header-nav-link ">Помощь в подборе</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="#" class="header-nav-link ">Добавить отзыв</a>
+                            <a href="#" class="header-nav-link disabled">Добавить отзыв</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="#" class="header-nav-link ">Отель</a>
+                            <a href="#" class="header-nav-link disabled">Отель</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="#" class="header-nav-link ">Турист</a>
+                            <a href="#" class="header-nav-link disabled">Турист</a>
                         </li>
 
 
@@ -294,25 +294,25 @@ AppAsset::register($this);
                     </div>
 
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мой профиль</a>
+                        <a href="#" class="header-profile__link disabled">Мой профиль</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мои интересы</a>
+                        <a href="#" class="header-profile__link disabled">Мои интересы</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мои действия</a>
+                        <a href="#" class="header-profile__link disabled">Мои действия</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мои друзья</a>
+                        <a href="#" class="header-profile__link disabled">Мои друзья</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Избранные отели</a>
+                        <a href="#" class="header-profile__link disabled">Избранные отели</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Уведомления</a>
+                        <a href="#" class="header-profile__link disabled">Уведомления</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link red">Выйти</a>
+                        <a href="#" class="header-profile__link red disabled">Выйти</a>
                     </div>
                 </div>
             </div>

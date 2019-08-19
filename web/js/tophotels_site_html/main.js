@@ -1,4 +1,6 @@
 jQuery(document).ready(function () {
+    lsfw.ui.main.request.directions = []; // направления
+    lsfw.ui.main.request.wh = "";         // пожелания
 
     $('.bth__loader').on('click', function (e) {
         e.preventDefault();
@@ -53,33 +55,16 @@ jQuery(document).ready(function () {
 
     /** Конец примеров **/
 
-    //Смена таба
-    $("#js_to_step2").click(function (e) {
-        $('#step1Panel').hide();
-
-        $('#formPanel').hide();
-        $('.orders-back-hotels').hide();
-        $('#formStep2Panel').hide();
-        $('#step2Panel').show();
-        $('.step2Panel').show();
-
-        $('.orders-consultants').hide();
-        $('#form-fullPanel').hide();
-        $('#step3Panel').hide();
-        $('#step0Panel').hide();
-    });
-
     // Отправка простой формы
     $("#send_custom_form").click(function (e) {
-        if (validateCustomForm())
-        {
+        if (validateCustomForm()) {
             $(this).addClass('bth__loader--animate');
 
             let formdata = new FormData();
-            formdata.append("name",$("#name1").val());
-            formdata.append("phone",$("#phone1").val());
-            formdata.append("email",$("#mail3").val());
-            formdata.append("text",$("#parametrs").val());
+            formdata.append("name", $("#name1").val());
+            formdata.append("phone", $("#phone1").val());
+            formdata.append("email", $("#mail3").val());
+            formdata.append("text", $("#parametrs").val());
 
             $.ajax({
                 url: "/send-custom-form",
@@ -89,8 +74,8 @@ jQuery(document).ready(function () {
                 contentType: false,
                 dataType: "json",
                 success: function (data) {
-                    $("#success_message").css("display","block");
-                    $("#formPanel").css("display","none");
+                    $("#success_message").show();
+                    $("#formPanel").hide();
                     clearCustomForm();
                 },
                 error: function (error) {
@@ -101,17 +86,38 @@ jQuery(document).ready(function () {
         }
     });
 
-    // Отправка сложной формы
+
+
+    // Отправка сложной формы шаг 2
     $("#send_hard_form").click(function (e) {
-        if(validateHardForm())
-        {
+        if (validateHardForm()) {
             $(this).addClass('bth__loader--animate');
 
-            //ajax
+            let formdata = new FormData();
+            formdata.append("id_order", $("#id_order_input").val());
+            formdata.append("name", $("#name3").val());
+            formdata.append("phone", $("#phone3").val());
+            formdata.append("email", $("#mail2").val());
+            formdata.append("city", $("#step2Panel #sumo-list-city").val());
+
+            $.ajax({
+                url: "/send-hard-form-two-step",
+                method: 'post',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function (data) {
+                    $("#success_message").show();
+                    $("#step2Panel").hide();
+                    clearHardForm();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
 
 
-            $("#step2panel_success_message").css("display","block");
-            $("#step2Panel div:not(#step2panel_success_message)").css("display","none");
         }
     })
 });
@@ -121,14 +127,37 @@ $(document).on('click', '.js-modal-close', function (e) {
     $.magnificPopup.close();
 });
 
+
 /** Функции работы с формами **/
 
+
+/**
+ *  Очистка сложной формы
+ */
+function clearHardForm() {
+    var data = [$("#name3"), $("#phone3"), $("#mail2")]; //todo полная очистка формы
+    clearForm(data);
+}
+
+
+/**
+ * Очистка простой формы
+ */
 function clearCustomForm() {
-    var data = [$("#name1"), $("#phone1"), $("#mail3"),$("#parametrs")];
+    var data = [$("#name1"), $("#phone1"), $("#mail3"), $("#parametrs")];
+    clearForm(data);
+}
+
+/**
+ * Общая функция чистки формы
+ * @param data
+ */
+function clearForm(data) {
     $.each(data, function (index, value) {
         value.val("");
     });
 }
+
 
 /** Конец функций работы с формами **/
 
@@ -136,7 +165,7 @@ function clearCustomForm() {
 /** Валидации **/
 
 function validateHardForm() {
-    var data = [$("#name3"), $("#phone3"), $("#mail2"),$("#choose_city")];
+    var data = [$("#name3"), $("#phone3"), $("#mail2"), $("#sumo-list-city")];
     var rules = [
         ["required"],
         ["required"],
@@ -147,10 +176,7 @@ function validateHardForm() {
     let errors = validateData(data, rules);
 
     if (errors.length != 0) {
-        $.each(errors, function (index, error) {
-            if(error !== undefined)
-                error.parent('.js-add-error').addClass('has-error');
-        });
+        showErrors(errors);
         return false;
     }
 
@@ -164,22 +190,34 @@ function validateHardForm() {
 function validateCustomForm() {
     var data = [$("#name1"), $("#phone1"), $("#mail3")];
     var rules = [
-        ["required","letters"],
-        ["required","numbers"],
+        ["required", "letters"],
+        ["required", "numbers"],
         ["email"]
     ];
 
     let errors = validateData(data, rules);
 
     if (errors.length != 0) {
-        $.each(errors, function (index, error) {
-            if(error !== undefined)
-                error.parent('.js-add-error').addClass('has-error');
-        });
+        showErrors(errors);
         return false;
     }
 
     return true;
+}
+
+
+/**
+ * Общая функция вывода ошибок
+ * @param errors
+ */
+function showErrors(errors) {
+    $.each(errors, function (index, error) {
+        if (error !== undefined)
+            if (error.parents('.js-add-error').length > 0)
+                error.parents('.js-add-error').addClass('has-error');
+            else
+                error.parents(".tour-selection-wrap-in").find('.js-add-error').addClass('has-error');
+    });
 }
 
 /**
@@ -196,7 +234,7 @@ function validateData(data, rules) {
         $.each(rules[i], function (index, rule) {
             switch (rule) {
                 case "required":
-                    if (data[i].val().length < 1) errors[i] = data[i];
+                    if (data[i].val() === null || data[i].val().length < 1) errors[i] = data[i];
                     break;
                 case "email":
                     if (!validateEmail(data[i].val()) && data[i].val().length > 0) errors[i] = data[i];
@@ -225,3 +263,31 @@ function validateEmail(email) {
 }
 
 /** Конец валидаций **/
+
+
+/** Общие функции **/
+
+function updateRequestObject()
+{
+    let directions = [];
+
+    let direction_divs = $(".js-types-search-tours-blocks .tour-selection-wrap-in");
+
+    $.each(direction_divs,function (index,direction_div) {
+       if($(direction_div).is(":visible"))
+       {
+           directions[index] = {};
+           directions[index].cu = $(direction_div).find('select[id="sumo-direction"]').val();
+           directions[index].ct = $(direction_div).find('select[id="sumo-direction-city"]').val();
+           directions[index].cd = $(direction_div).find('select[id="sumo-department"]').val();
+           //hotel
+       }
+    });
+
+    lsfw.ui.main.request.directions = directions;
+
+    lsfw.ui.main.request.wh = $("#wishes").text();
+}
+
+
+/** Конец обших функций **/

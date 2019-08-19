@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','queue'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -16,6 +16,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'IRLK_6YCvbWlBiYBEi7FYQYXo4cpC_hx',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -59,8 +62,17 @@ $config = [
             'rules' => [
                 '/' => 'site/index',
                 'send-custom-form' => 'site/send-custom-form',
+                'send-hard-form-one-step' => 'site/send-hard-form-one-step',
+                'send-hard-form-two-step' => 'site/send-hard-form-two-step',
             ],
         ],
+        'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'db' => 'db',
+            'tableName' => '{{%queue}}',
+            'channel' => 'default',
+            'mutex' => 'yii\mutex\FileMutex',
+        ]
     ],
     'params' => $params,
 ];
@@ -70,6 +82,9 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'panels' => [
+            'queue' => \yii\queue\debug\Panel::class,
+        ],
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];

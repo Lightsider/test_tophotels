@@ -27,14 +27,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'created_at',
             'direction',
-            'name',
-            'phone',
+            [
+                'attribute' => 'name',
+                'format' => 'text',
+                'value' => function ($model) {
+                    return StringHelper::truncate($model->name, 15);
+                }
+            ],
+            [
+                'attribute' => 'phone',
+                'format' => 'text',
+                'value' => function ($model) {
+                    return StringHelper::truncate($model->phone, 15);
+                }
+            ],
             'email:email',
             [
                 'attribute' => 'text',
                 'format' => 'text',
                 'value' => function ($model) {
-                    return StringHelper::truncate($model->text, 40);
+                    return StringHelper::truncate($model->text, 30);
                 }
             ],
 

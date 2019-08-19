@@ -61,4 +61,19 @@ class Orders extends \yii\db\ActiveRecord
     {
         return new OrdersQuery(get_called_class());
     }
+
+    /**
+     *  Функция отправки сообщения на почту
+     */
+    public function sendEmailNotification()
+    {
+        Yii::$app->mailer->compose('order_mail', [
+            'order' => $this,
+            'receiver' => Yii::$app->params['receiverEmail'],
+        ])
+            ->setTo(Yii::$app->params['receiverEmail'])
+            ->setFrom(Yii::$app->params['senderEmail'])
+            ->setSubject(Yii::$app->params['senderEmailSubject'])
+            ->send();
+    }
 }
