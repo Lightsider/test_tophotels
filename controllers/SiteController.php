@@ -76,12 +76,6 @@ class SiteController extends Controller
                 Yii::$app->queue->delay(2 * 60)->push(new MailDelayJob([
                     'order' => $order,
                 ]));
-                Yii::$app->queue->on(Queue::EVENT_BEFORE_EXEC, function ($event) {
-                    $queue = $event->sender;
-                    $order = Orders::find()->where('id = :id', [':id' => $event->job->getOrder()->id])->one();
-                    $event->job->setOrder($order);
-                    $queue->push($event->job);
-                });
 
                 return $this->asJson(["status" => "success","id" => $order->id]);
             } else {

@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="page">
     <div class="headerMobile">
         <div class="headerMobile__flex js-serach-active-hide">
-            <a href="/tophotels/" class="headerMobile__logo">
+            <a href="/" class="headerMobile__logo">
                 <img src="/i/th-logo.png" width="112" height="40" class="mr10">
             </a>
 
@@ -204,7 +204,7 @@ AppAsset::register($this);
     <header class="header">
 
         <div class="header-cnt header-cnt_index ">
-            <a href="/tophotels/" class="header-logo">
+            <a href="/" class="header-logo">
                 <img src="/i/th-logo.png" alt="">
             </a>
             <div class="header-nav">

@@ -1,6 +1,10 @@
 jQuery(document).ready(function () {
     lsfw.ui.main.request.directions = []; // направления
     lsfw.ui.main.request.wh = "";         // пожелания
+    lsfw.ui.main.request.dc = "";         // город вылета
+    lsfw.ui.main.request.nc = "";         // питание
+    lsfw.ui.main.request.ht = [];         // отель
+
 
     $('.bth__loader').on('click', function (e) {
         e.preventDefault();
@@ -87,7 +91,6 @@ jQuery(document).ready(function () {
     });
 
 
-
     // Отправка сложной формы шаг 2
     $("#send_hard_form").click(function (e) {
         if (validateHardForm()) {
@@ -129,6 +132,47 @@ $(document).on('click', '.js-modal-close', function (e) {
 
 
 /** Функции работы с формами **/
+
+/**
+ *  Вывод элементов списка отелей
+ * @param data
+ */
+function renderHotels(data) {
+    let hotels_list = $(".js-hotels .formDirections--big-mobile:visible").find(".hotels_list");
+    $(hotels_list).find(".formDirections__bottom-item").remove();
+    let html = "";
+    let country_id = country_name = name = stars = resort_name = resort_place_name = "";
+
+    for (let i = 0; i < 10; i++) // Потому что условие на 10 отелей
+    {
+        country_id = data[i].country_id !== null ? data[i].country_id : "";
+        country_name = data[i].country_name !== null ? data[i].country_name : "";
+        name = data[i].name !== null ? data[i].name : "";
+        stars = data[i].stars !== null ? data[i].stars : "";
+        resort_name = data[i].resort_name !== null ? data[i].resort_name : "";
+        resort_place_name = data[i].resort_place_name !== null ? data[i].resort_place_name : "";
+
+        html = "<div class=\"formDirections__bottom-item\" data-name='" + name + "' data-stars='" + stars + "'" +
+            "data-resort_name='" + resort_name + "' data-resort_place_name='" + resort_place_name + "'" +
+            "data-country_name='" + country_name + "'>\n" +
+            "     <div class=\"formDirections__city\">\n" +
+            "        <div class=\" lsfw-flag lsfw-flag--30w lsfw-flag-" + country_id + "\">\n" +
+            "            <div class=\"hint\">" + country_name + "</div>\n" +
+            "        </div>\n" +
+            "        <span class=\"formDirections__cut\">" + name + "</span> " + stars +
+            "     </div>\n" +
+            "     <span class=\"formDirections__count\">" + resort_name + " " + resort_place_name + "</span>\n" +
+            "   </div>";
+        $(hotels_list).append(html);
+    }
+}
+
+
+function updateHotelsSelect(block) {
+    let countInputs = +$(block).find(':checkbox:checked').length + $(block).find(':radio:checked').length;
+    // считать автоматически не верно, потому что радиобаттонов много
+    $(block).find(".bth__inp b").text(countInputs + " / 36 ");
+}
 
 
 /**
@@ -267,26 +311,155 @@ function validateEmail(email) {
 
 /** Общие функции **/
 
-function updateRequestObject()
-{
-    let directions = [];
+/**
+ * Обшая функция обновления главного объекта
+ */
 
-    let direction_divs = $(".js-types-search-tours-blocks .tour-selection-wrap-in");
+function updateRequestObject() {
+    lsfw.ui.main.request.dc = "";
+    if ($("#type1").is(":checked")) {
+        let directions = [], hotel_params = {};
 
-    $.each(direction_divs,function (index,direction_div) {
-       if($(direction_div).is(":visible"))
-       {
-           directions[index] = {};
-           directions[index].cu = $(direction_div).find('select[id="sumo-direction"]').val();
-           directions[index].ct = $(direction_div).find('select[id="sumo-direction-city"]').val();
-           directions[index].cd = $(direction_div).find('select[id="sumo-department"]').val();
-           //hotel
-       }
-    });
+        let direction_divs = $(".js-types-search-tours-blocks .tour-selection-wrap-in");
 
-    lsfw.ui.main.request.directions = directions;
+        $.each(direction_divs, function (index, direction_div) {
+            if ($(direction_div).is(":visible")) {
+                hotel_params = {};
+                directions[index] = {};
+                directions[index].hotel = {};
+                // Использую поля потому что селект подхватывает 1 значение
+                if ($(direction_div).find('#select_country .bth__inp').text().length > 0)
+                    directions[index].cu = $(direction_div).find('#select_country .bth__inp').text();
+                else
+                    directions[index].cu = $(direction_div).find('.tour-selection__country-cut').text();
+                directions[index].ct = $(direction_div).find('#select_city .bth__inp').text();
+                directions[index].cd = $(direction_div).find('select[id="sumo-department"]').val();
 
-    lsfw.ui.main.request.wh = $("#wishes").text();
+                // Отели
+
+                // категории
+                hotel_params.stars = "";
+
+                let stars_arr = $(direction_div).find("input[name='stars']");
+                $.each(stars_arr, function (index, stars) {
+                    if (index != 0 && $(stars).is(":checked")) {
+                        hotel_params.stars += $(stars).val() + " ";
+                    }
+                });
+
+                if (hotel_params.stars == "") {
+                    hotel_params.stars = "ЛЮБАЯ КАТЕГОРИЯ";
+                }
+                ;
+
+                // рейтинг
+                hotel_params.rate = $(direction_div).find("input[name='333rating_" + index + "']:checked").val();
+
+                // питание
+                let nutrition = "";
+                let nc_arr = $(direction_div).find("input[name='nc[]']");
+                $.each(nc_arr, function (index, nc) {
+                    if (index != 0 && $(nc).is(":checked")) {
+                        nutrition += $(nc).val() + " ";
+                    }
+                });
+
+                if (nutrition == "") {
+                    nutrition = "Любое";
+                }
+                hotel_params.nutrition = nutrition;
+
+                // расположение
+                let place_type = "";
+                let place_type_arr = $(direction_div).find("input[name='place_type[]']");
+                $.each(place_type_arr, function (index, place) {
+                    if (index != 0 && $(place).is(":checked")) {
+                        place_type += $(place).val() + ";";
+                    }
+                });
+                if (place_type == "") {
+                    place_type = "любой тип";
+                }
+                hotel_params.place_type = place_type;
+
+                // дети
+                let kids = "";
+                let kids_arr = $(direction_div).find("input[name='kids[]']");
+                $.each(kids_arr, function (index, children) {
+                    if (index != 0 && $(children).is(":checked")) {
+                        kids += $(children).val() + ";";
+                    }
+                });
+                if (kids == "") {
+                    kids = "Не требуется";
+                }
+                hotel_params.kids = kids;
+
+                // Прочее
+
+                let other = "";
+                let other_arr = $(direction_div).find("input[name='other[]']");
+                $.each(other_arr, function (index, item) {
+                    if (index != 0 && $(item).is(":checked")) {
+                        other += $(item).val() + ";";
+                    }
+                });
+                if (other == "") {
+                    other = "Не требуется";
+                }
+                hotel_params.other = other;
+
+
+                directions[index].hotel = hotel_params;
+            }
+        });
+
+        lsfw.ui.main.request.directions = directions;
+
+        lsfw.ui.main.request.wh = $("#wishes").text();
+    }
+    else {
+        //еда
+        lsfw.ui.main.request.nc = "";
+        let nc_arr = $("input[name='nc[]']");
+        $.each(nc_arr, function (index, nc) {
+            if (index != 0 && $(nc).is(":checked")) {
+                lsfw.ui.main.request.nc += $(nc).val() + " ";
+            }
+        });
+
+        if (lsfw.ui.main.request.nc == "") {
+            lsfw.ui.main.request.nc = "Любое";
+            $("#nutrition_all").attr("checked", true);
+        }
+        else $("#nutrition_all").removeAttr("checked");
+
+        //Отели
+        let string_hotel = "";
+        let string_hotel_place = "";
+
+        let hotels = [];
+
+        let hotels_divs = $(".js-hotels");
+
+        $.each(hotels_divs, function (index, hotels_div) {
+            if ($(hotels_div).is(":visible")) {
+                string_hotel = $(hotels_div).data('name') + " " + $(hotels_div).data('stars');
+                string_hotel_place = $(hotels_div).data('country_name') + " " + $(hotels_div).data('resort_place_name');
+
+                hotels[index] = {};
+                hotels[index].hn = string_hotel;
+                hotels[index].hp = string_hotel_place;
+            }
+        });
+
+
+        lsfw.ui.main.request.ht = hotels;
+
+        // Город вылета
+        lsfw.ui.main.request.dc = $(".js-types-search-hotel-blocks #select_department .bth__inp").text();
+    }
+
 }
 
 

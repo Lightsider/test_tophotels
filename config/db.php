@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'sqlite:'.__DIR__ . '/../tophotels.db',
+    'dsn' => 'sqlite:'.__DIR__ . '/../database/tophotels.db',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

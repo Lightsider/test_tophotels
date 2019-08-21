@@ -129,12 +129,13 @@ $(document).ready(function () {
         $(this).addClass("bth__loader--animate");
         let object = lsfw.ui.main.request;
         object.wh = $("#wishes").text();
+        object.type = $("#type2").is(":checked")? 2 : 1;
         //ajax
         $.ajax({
             url: "/send-hard-form-one-step",
             type: 'post',
             data: JSON.stringify(object),
-            contentType : 'application/json',
+            contentType: 'application/json',
             dataType: "json",
             success: function (data) {
 
@@ -217,11 +218,17 @@ $(document).ready(function () {
     });
 
     $('.js-add-hotel ').on('click', function () {
-        $('.js-show-add-hotel').show();
+        let elements = $('.js-show-add-hotel');
+        $.each(elements, function (key, element) {
+            if ($(element).is(":hidden")) {
+                $(element).show();
+                return false;
+            }
+        });
     });
 
     $('.js-del-hotel ').on('click', function () {
-        $('.js-show-add-hotel').hide();
+        $(this).parents(".js-show-add-hotel").hide();
     });
 
 
@@ -237,7 +244,7 @@ $(document).ready(function () {
     sumoDirectionCity.change(function () {
         // Общие переменные
         let value = $(this).val();
-        let select_city =  $(this).parents(".tour-selection-wrap-in").find("#select_city");
+        let select_city = $(this).parents(".tour-selection-wrap-in").find("#select_city");
         select_city.find(".bth__inp").text(value);
 
         updateRequestObject();
@@ -302,13 +309,12 @@ $(document).ready(function () {
     sumoListCity.change(function () {
         // Общие переменные
         let value = $(this).val();
-        let select_list_city =  $(this).parents(".tour-selection-wrap-in").find("#select_list_city");
+        let select_list_city = $(this).parents(".tour-selection-wrap-in").find("#select_list_city");
         select_list_city.find(".bth__inp-lbl").addClass("active");
         select_list_city.find("b.uppercase").text(value);
 
         updateRequestObject();
     });
-
 
 
 //Город вылета
@@ -323,7 +329,7 @@ $(document).ready(function () {
     sumoDepartment.change(function () {
         // Общие переменные
         let value = $(this).val();
-        let select_department =  $(this).parents(".tour-selection-wrap-in").find("#select_department");
+        let select_department = $(this).parents(".tour-selection-wrap-in").find("#select_department");
         select_department.find(".bth__inp").text(value);
 
         updateRequestObject();
@@ -344,7 +350,53 @@ $(document).ready(function () {
         datepicker: $('#mtIdxDateHelp2')
     }, mytour.searchTours.main.request);
 
+    // Выбор еды
+    $("#nutrition_select .formDirections__static-btn").click(function (e) {
+        updateRequestObject();
 
+        $("#nutrition").text(lsfw.ui.main.request.nc);
+
+    })
+
+    // Выбор отеля
+    $(".hotel_search").change(function (e) {
+        let search_string = $(this).val();
+        if (search_string.length > 2) {
+            $.get("https://tophotels.ru/lsfw/dict/allocation?nameSearch=" + search_string)
+                .done(function (data) {
+                    renderHotels(data);
+                });
+        }
+    });
+
+    $(".hotels_list").on("click",".formDirections__bottom-item",function()
+    {
+        $(this).parents(".js-hotels").attr("data-name",$(this).data('name'));
+        $(this).parents(".js-hotels").attr("data-stars",$(this).data('stars'));
+        $(this).parents(".js-hotels").attr("data-country_name",$(this).data('country_name'));
+        $(this).parents(".js-hotels").attr("data-resort_place_name",$(this).data('resort_place_name'));
+        updateRequestObject();
+
+        let js_hotels = $(this).parents(".js-hotels");
+        let html = "<b>" +
+            "         <span class=\"tour-selection__hotel-cut uppercase\">" +
+            lsfw.ui.main.request.ht[$(js_hotels).data("index")].hn + "</span>\n" +
+            "       </b>\n" +
+            "       <span class=\"normal fz13 ml10\">" + lsfw.ui.main.request.ht[$(js_hotels).data("index")].hp + "</span>"
+
+        $(js_hotels).find(".bth__inp-block .bth__inp").html(html);
+        $(js_hotels).find(".bth__inp-block .bth__inp-lbl").addClass("active");
+        $(js_hotels).find(".formDirections__bottom-close").click();
+
+    });
+
+
+    $(".hotel-params-form .formDirections__btn-orange").click(function () {
+        updateRequestObject();
+        updateHotelsSelect($(this).parents(".tour-selection-field"))
+    });
+
+    updateHotelsSelect($(".hotel-params-form").parents(".tour-selection-wrap-in:visible").find(".tour-selection-field"));
 })
 ;
 

@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Orders;
+use yii\queue\ExecEvent;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -33,6 +36,12 @@ $config = [
             'tableName' => '{{%queue}}',
             'channel' => 'default',
             'mutex' => 'yii\mutex\FileMutex',
+            'on beforeExec' => function ($event) {
+                $queue = $event->sender;
+                $order = Orders::find()->where('id = :id', [':id' => $event->job->getOrder()->id])->one();
+                $event->job->setOrder($order);
+                return true;
+            }
         ],
         'urlManager' => [
             'baseUrl' => 'http://localhost:8080/',
@@ -59,15 +68,15 @@ $config = [
         ],
     ],
     'params' => $params,
-    'controllerMap' => [
-        'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
-            'migrationPath' => null,
-            'migrationNamespaces' => [
-                'yii\queue\db\migrations',
-            ],
-        ],
-    ],
+//    'controllerMap' => [
+//        'migrate' => [
+//            'class' => 'yii\console\controllers\MigrateController',
+//            'migrationPath' => null,
+//            'migrationNamespaces' => [
+//                'yii\queue\db\migrations',
+//            ],
+//        ],
+//    ],
 ];
 
 if (YII_ENV_DEV) {

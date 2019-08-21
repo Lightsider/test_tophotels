@@ -12,8 +12,9 @@ use yii\filters\VerbFilter;
 /**
  * OrderController implements the CRUD actions for Orders model.
  */
-class OrderController extends AdminController
+class OrderController extends Controller
 {
+    public $layout = '@app/views/layouts/admin.php';
 
     /**
      * Lists all Orders models.
