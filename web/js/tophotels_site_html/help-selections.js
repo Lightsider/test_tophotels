@@ -129,7 +129,7 @@ $(document).ready(function () {
         $(this).addClass("bth__loader--animate");
         let object = lsfw.ui.main.request;
         object.wh = $("#wishes").text();
-        object.type = $("#type2").is(":checked")? 2 : 1;
+        object.type = $("#type2").is(":checked") ? 2 : 1;
         //ajax
         $.ajax({
             url: "/send-hard-form-one-step",
@@ -369,12 +369,11 @@ $(document).ready(function () {
         }
     });
 
-    $(".hotels_list").on("click",".formDirections__bottom-item",function()
-    {
-        $(this).parents(".js-hotels").attr("data-name",$(this).data('name'));
-        $(this).parents(".js-hotels").attr("data-stars",$(this).data('stars'));
-        $(this).parents(".js-hotels").attr("data-country_name",$(this).data('country_name'));
-        $(this).parents(".js-hotels").attr("data-resort_place_name",$(this).data('resort_place_name'));
+    $(".hotels_list").on("click", ".formDirections__bottom-item", function () {
+        $(this).parents(".js-hotels").attr("data-name", $(this).data('name'));
+        $(this).parents(".js-hotels").attr("data-stars", $(this).data('stars'));
+        $(this).parents(".js-hotels").attr("data-country_name", $(this).data('country_name'));
+        $(this).parents(".js-hotels").attr("data-resort_place_name", $(this).data('resort_place_name'));
         updateRequestObject();
 
         let js_hotels = $(this).parents(".js-hotels");

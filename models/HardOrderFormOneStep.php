@@ -125,12 +125,12 @@ class HardOrderFormOneStep extends Model
 
         } else {
             if (!empty($this->directions)) {
-                $order->direction = $this->directions[0]["cu"] . "\\город отеля\\отель";
+                $order->direction = $this->directions[0]["cu"] . "\\" . $this->directions[0]["ct"] . "\\любой";
                 $order->text = implode(PHP_EOL, [
                     //доп пожелания
                     "Пожелания: " . $this->wh,
                     // город вылета
-                    "Город вылета: " . $this->directions[0]["cd"],
+                    "Город вылета: " . $this->directions[0]["cd"] . PHP_EOL,
                 ]);
 
                 // инфа доп направлений
@@ -142,13 +142,13 @@ class HardOrderFormOneStep extends Model
                 }
             } else {
                 $order->direction = "Любое";
-                $order->text = $this->wh;
+                $order->text = "Пожелания: " . $this->wh . PHP_EOL;
             }
 
-            $order->text .= "Период дат вылета: с " . $this->df . " до " . $this->dt.PHP_EOL.
-                    "Количество ночей: " . $this->nf . "-" . (string)$this->nt.PHP_EOL.
-                    "Цена: " . $this->pc . " - комфортно, " . (string)$this->pt . " - максимум".PHP_EOL.
-                    "Взрослых людей:" . $this->ad . PHP_EOL;
+            $order->text .= "Период дат вылета: с " . $this->df . " до " . $this->dt . PHP_EOL .
+                "Количество ночей: " . $this->nf . "-" . (string)$this->nt . PHP_EOL .
+                "Цена: " . $this->pc . " - комфортно, " . (string)$this->pt . " - максимум" . PHP_EOL .
+                "Взрослых людей:" . $this->ad . PHP_EOL;
 
             if ($this->ch != 0) {
                 $order->text .= "Детей: " . $this->ch . PHP_EOL;

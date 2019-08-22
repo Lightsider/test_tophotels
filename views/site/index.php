@@ -1,6 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $countries \app\models\DictCountry */
+/* @var $city \app\models\DictCity */
 
 use yii\helpers\Url;
 
@@ -14,7 +16,10 @@ $this->title = 'TopHotels';
             <div class="line" style="width: 117.812px"></div>
         </div>
         <?= $this->render('../forms/custom_form'); ?>
-        <?=$this->render('../forms/hard_form');?>
+        <?= $this->render('../forms/hard_form', [
+            'countries' => $countries,
+            'cities' => $cities
+        ]); ?>
         <div class="panel" id="success_message" style="display: none">
             <div class="bth__cnt fz18 bold">
                 Спасибо, Ваша заявка отправлена и будет обработана в ближайшее время.
@@ -59,7 +64,8 @@ $this->title = 'TopHotels';
                             </li>
                             <li class="side-nav-li">
                                 <a href="#help-selection"
-                                   class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor disabled">Помощь в
+                                   class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor disabled">Помощь
+                                    в
                                     подборе</a>
                             </li>
                             <li class="side-nav-li">
@@ -398,5 +404,5 @@ $this->title = 'TopHotels';
 
     </div>
 
-    <?=$this->render('../parts/agreement_and_legal_info');?>
+    <?= $this->render('../parts/agreement_and_legal_info'); ?>
 </div>

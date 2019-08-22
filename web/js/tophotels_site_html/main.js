@@ -211,8 +211,8 @@ function clearForm(data) {
 function validateHardForm() {
     var data = [$("#name3"), $("#phone3"), $("#mail2"), $("#sumo-list-city")];
     var rules = [
-        ["required"],
-        ["required"],
+        ["required", "letters"],
+        ["required", "numbers"],
         ["email"],
         ["required"]
     ];
@@ -347,10 +347,9 @@ function updateRequestObject() {
                     }
                 });
 
-                if (hotel_params.stars == "") {
+                if ($(stars_arr[0]).is(":checked")) {
                     hotel_params.stars = "ЛЮБАЯ КАТЕГОРИЯ";
                 }
-                ;
 
                 // рейтинг
                 hotel_params.rate = $(direction_div).find("input[name='333rating_" + index + "']:checked").val();
@@ -364,8 +363,8 @@ function updateRequestObject() {
                     }
                 });
 
-                if (nutrition == "") {
-                    nutrition = "Любое";
+                if ($(nc_arr[0]).is(":checked")) {
+                    nutrition = "любое";
                 }
                 hotel_params.nutrition = nutrition;
 
@@ -377,7 +376,7 @@ function updateRequestObject() {
                         place_type += $(place).val() + ";";
                     }
                 });
-                if (place_type == "") {
+                if ($(place_type_arr[0]).is(":checked")) {
                     place_type = "любой тип";
                 }
                 hotel_params.place_type = place_type;

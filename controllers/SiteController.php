@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\jobs\MailDelayJob;
 use app\models\CustomOrderForm;
+use app\models\DictCity;
+use app\models\DictCountry;
 use app\models\HardOrderFormOneStep;
 use app\models\HardOrderFormTwoStep;
 use app\models\Orders;
@@ -38,7 +40,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $countries = DictCountry::find()->orderBy("name","asc")->all();
+        $cities = DictCity::find()->orderBy("name","asc")->all();
+
+        return $this->render('index', [
+            'countries' => $countries,
+            'cities' => $cities
+        ]);
     }
 
     /**
@@ -77,7 +85,7 @@ class SiteController extends Controller
                     'order' => $order,
                 ]));
 
-                return $this->asJson(["status" => "success","id" => $order->id]);
+                return $this->asJson(["status" => "success", "id" => $order->id]);
             } else {
                 return $this->asJson(["status" => "error"])->setStatusCode(500);
             }
