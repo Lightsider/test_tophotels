@@ -138,7 +138,7 @@ class HardOrderFormOneStep extends Model
                     "Питание - " . $this->directions[0]["hotel"]["nutrition"] . ";" .
                     "Расположение - " . $this->directions[0]["hotel"]["place_type"] . ";" .
                     "Дети - " . $this->directions[0]["hotel"]["kids"] . ";" .
-                    "Прочее - " . $this->directions[0]["hotel"]["other"] . ";" .PHP_EOL;
+                    "Прочее - " . $this->directions[0]["hotel"]["other"] . ";" . PHP_EOL;
 
                 // инфа доп направлений
                 if (!empty($this->directions[1])) {
@@ -149,7 +149,7 @@ class HardOrderFormOneStep extends Model
                         "Питание - " . $this->directions[1]["hotel"]["nutrition"] . ";" .
                         "Расположение - " . $this->directions[1]["hotel"]["place_type"] . ";" .
                         "Дети - " . $this->directions[1]["hotel"]["kids"] . ";" .
-                        "Прочее - " . $this->directions[1]["hotel"]["other"] . ";" .PHP_EOL;
+                        "Прочее - " . $this->directions[1]["hotel"]["other"] . ";" . PHP_EOL;
 
                 }
                 if (!empty($this->directions[2])) {
@@ -159,31 +159,50 @@ class HardOrderFormOneStep extends Model
                         "Питание - " . $this->directions[2]["hotel"]["nutrition"] . ";" .
                         "Расположение - " . $this->directions[2]["hotel"]["place_type"] . ";" .
                         "Дети - " . $this->directions[2]["hotel"]["kids"] . ";" .
-                        "Прочее - " . $this->directions[2]["hotel"]["other"] . ";" .PHP_EOL;
+                        "Прочее - " . $this->directions[2]["hotel"]["other"] . ";" . PHP_EOL;
                 }
             } else {
                 $order->direction = "Любое";
                 $order->text = "Пожелания: " . $this->wh . PHP_EOL;
             }
 
-            $order->text .= "Период дат вылета: с " . $this->df . " до " . $this->dt . PHP_EOL .
-                "Количество ночей: " . $this->nf . "-" . (string)$this->nt . PHP_EOL .
-                "Цена: " . $this->pc . " - комфортно, " . (string)$this->pt . " - максимум" . PHP_EOL .
-                "Взрослых людей:" . $this->ad . PHP_EOL;
-
-            if ($this->ch != 0) {
-                $order->text .= "Детей: " . $this->ch . PHP_EOL;
-                if (!empty($this->ch1)) {
-                    $order->text .= "Возраст 1 - " . $this->ch1 . PHP_EOL;
-                }
-                if (!empty($this->ch2)) {
-                    $order->text .= "Возраст 2 - " . $this->ch2 . PHP_EOL;
-                }
-                if (!empty($this->ch3)) {
-                    $order->text .= "Возраст 3 - " . $this->ch3 . PHP_EOL;
-                }
+            if (!empty($this->dt)) {
+                $order->departure_date_numbers_of_nights = "Даты вылета: C " . $this->df . " до " . $this->dt . ";";
+            } else {
+                $order->departure_date_numbers_of_nights = "Дата вылета: " . $this->df . ";";
             }
 
+            if (!empty($this->nt) && $this->nt != $this->nf) {
+                $order->departure_date_numbers_of_nights .= "Количество ночей: " . $this->nf . "-" . $this->nt;
+            } else {
+                $order->departure_date_numbers_of_nights .= "Количество ночей: " . $this->nf;
+            }
+
+            if (!empty($this->pc)) {
+                $order->budget = "Комфорт: " . $this->pc . "; ";
+            }
+            
+            if ($this->pt != 0) {
+                $order->budget .= "Максимум: " . $this->pt;
+            } else {
+                $order->budget .= "Максимум: не ограничен";
+            }
+
+
+            $order->peoples_count = "Взрослых людей:" . $this->ad;
+
+            if ($this->ch != 0) {
+                $order->peoples_count .= "; Детей: " . $this->ch . ": ";
+                if (!empty($this->ch1)) {
+                    $order->peoples_count .= "Возраст 1 - " . $this->ch1 . ";";
+                }
+                if (!empty($this->ch2)) {
+                    $order->peoples_count .= "Возраст 2 - " . $this->ch2 . ";";
+                }
+                if (!empty($this->ch3)) {
+                    $order->peoples_count .= "Возраст 3 - " . $this->ch3 . ";";
+                }
+            }
 
         }
 

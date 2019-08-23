@@ -42,6 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'email:email',
+            'departure_date_numbers_of_nights',
+            'peoples_count',
+            'budget',
+            'tourist_city',
             [
                 'attribute' => 'text',
                 'format' => 'text',

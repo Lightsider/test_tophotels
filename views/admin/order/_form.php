@@ -35,6 +35,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'departure_date_numbers_of_nights')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'peoples_count')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'budget')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tourist_city')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">

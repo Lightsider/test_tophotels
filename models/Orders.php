@@ -14,6 +14,10 @@ use Yii;
  * @property string $phone
  * @property string $email
  * @property string $text
+ * @property string $departure_date_numbers_of_nights
+ * @property string $peoples_count
+ * @property string $budget
+ * @property string $tourist_city
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -33,7 +37,20 @@ class Orders extends \yii\db\ActiveRecord
         return [
             [['created_at'], 'required'],
             [['text'], 'string'],
-            [['name', 'phone', 'email','direction'], 'string', 'max' => 255],
+            [
+                [
+                    'name',
+                    'phone',
+                    'email',
+                    'direction',
+                    'departure_date_numbers_of_nights',
+                    "peoples_count",
+                    "budget",
+                    "tourist_city"
+                ],
+                'string',
+                'max' => 255
+            ],
         ];
     }
 
@@ -44,12 +61,16 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID заявки',
-            'created_at'=>"Дата и время добавления",
-            'direction'=>"Направление",
+            'created_at' => "Дата и время добавления",
+            'direction' => "Направление",
             'name' => 'Имя',
             'phone' => 'Телефон',
             'email' => 'Email',
             'text' => 'Доп. пожелание',
+            'departure_date_numbers_of_nights' => 'Дата выезда\\Количество ночей',
+            'peoples_count' => 'Количество человек',
+            'budget' => 'Бюджет',
+            'tourist_city' => 'Город туриста',
         ];
     }
 

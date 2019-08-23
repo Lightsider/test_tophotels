@@ -57,7 +57,7 @@ class HardOrderFormTwoStep extends Model
         $order->name = $this->name;
         $order->phone = $this->phone;
         $order->email = $this->email;
-        $order->text .= "Город пользователя: ".$this->city.PHP_EOL;
+        $order->tourist_city = $this->city;
 
         $order->save();
 
