@@ -181,7 +181,7 @@ class HardOrderFormOneStep extends Model
             if (!empty($this->pc)) {
                 $order->budget = "Комфорт: " . $this->pc . "; ";
             }
-            
+
             if ($this->pt != 0) {
                 $order->budget .= "Максимум: " . $this->pt;
             } else {

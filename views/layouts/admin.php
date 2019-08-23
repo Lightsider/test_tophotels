@@ -46,6 +46,7 @@ AdminAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 ['label' => 'Заявки', 'url' => ['/admin/order']],
+                ['label' => 'Консультанты', 'url' => ['/admin/consultants']],
                 ['label' => 'К основному сайту', 'url' => ['/']]
             ],
         ]);
