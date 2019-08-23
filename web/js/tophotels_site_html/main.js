@@ -333,7 +333,7 @@ function updateRequestObject() {
                 else
                     directions[index].cu = $(direction_div).find('.tour-selection__country-cut').text();
                 directions[index].ct = $(direction_div).find('#select_city .bth__inp').text();
-                directions[index].cd = $(direction_div).find('select[id="sumo-department"]').val();
+                directions[index].cd = $(direction_div).find('#select_department .bth__inp').text();
 
                 // Отели
 
@@ -420,7 +420,7 @@ function updateRequestObject() {
     else {
         //еда
         lsfw.ui.main.request.nc = "";
-        let nc_arr = $("input[name='nc[]']");
+        let nc_arr = $(".js-types-search-hotel-blocks input[name='nc[]']");
         $.each(nc_arr, function (index, nc) {
             if (index != 0 && $(nc).is(":checked")) {
                 lsfw.ui.main.request.nc += $(nc).val() + " ";
@@ -443,8 +443,8 @@ function updateRequestObject() {
 
         $.each(hotels_divs, function (index, hotels_div) {
             if ($(hotels_div).is(":visible")) {
-                string_hotel = $(hotels_div).data('name') + " " + $(hotels_div).data('stars');
-                string_hotel_place = $(hotels_div).data('country_name') + " " + $(hotels_div).data('resort_place_name');
+                string_hotel = $(hotels_div).attr('data-name') + " " + $(hotels_div).attr('data-stars');
+                string_hotel_place = $(hotels_div).attr('data-country_name') + " " + $(hotels_div).attr('data-resort_place_name');
 
                 hotels[index] = {};
                 hotels[index].hn = string_hotel;

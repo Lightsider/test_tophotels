@@ -133,12 +133,33 @@ class HardOrderFormOneStep extends Model
                     "Город вылета: " . $this->directions[0]["cd"] . PHP_EOL,
                 ]);
 
+                $order->text .= "Отель: Категория - " . $this->directions[0]["hotel"]["stars"] . ";" .
+                    "Рейтинг - " . $this->directions[0]["hotel"]["rate"] . ";" .
+                    "Питание - " . $this->directions[0]["hotel"]["nutrition"] . ";" .
+                    "Расположение - " . $this->directions[0]["hotel"]["place_type"] . ";" .
+                    "Дети - " . $this->directions[0]["hotel"]["kids"] . ";" .
+                    "Прочее - " . $this->directions[0]["hotel"]["other"] . ";" .PHP_EOL;
+
                 // инфа доп направлений
                 if (!empty($this->directions[1])) {
-                    $order->text .= "Направление 2: " . $this->directions[1]["cu"] . "\\" . $this->directions[1]["ct"] . "\\" . $this->directions[1]["cd"] . PHP_EOL;
+                    $order->text .= "Направление 2: "
+                        . $this->directions[1]["cu"] . "\\" . $this->directions[1]["ct"] . "\\" . $this->directions[1]["cd"] . PHP_EOL;
+                    $order->text .= "Отель: Категория - " . $this->directions[1]["hotel"]["stars"] . ";" .
+                        "Рейтинг - " . $this->directions[1]["hotel"]["rate"] . ";" .
+                        "Питание - " . $this->directions[1]["hotel"]["nutrition"] . ";" .
+                        "Расположение - " . $this->directions[1]["hotel"]["place_type"] . ";" .
+                        "Дети - " . $this->directions[1]["hotel"]["kids"] . ";" .
+                        "Прочее - " . $this->directions[1]["hotel"]["other"] . ";" .PHP_EOL;
+
                 }
                 if (!empty($this->directions[2])) {
                     $order->text .= "Направление 3: " . $this->directions[2]["cu"] . "\\" . $this->directions[2]["ct"] . "\\" . $this->directions[2]["cd"] . PHP_EOL;
+                    $order->text .= "Отель: Категория - " . $this->directions[2]["hotel"]["stars"] . ";" .
+                        "Рейтинг - " . $this->directions[2]["hotel"]["rate"] . ";" .
+                        "Питание - " . $this->directions[2]["hotel"]["nutrition"] . ";" .
+                        "Расположение - " . $this->directions[2]["hotel"]["place_type"] . ";" .
+                        "Дети - " . $this->directions[2]["hotel"]["kids"] . ";" .
+                        "Прочее - " . $this->directions[2]["hotel"]["other"] . ";" .PHP_EOL;
                 }
             } else {
                 $order->direction = "Любое";

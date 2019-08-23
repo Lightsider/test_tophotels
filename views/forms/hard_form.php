@@ -383,7 +383,7 @@
 
                                             <div class="form-dropdown-stars__item ">
                                                 <div class="cbx-block    cbx-block--16 ">
-                                                    <input type="checkbox" class="cbx" id="333eat2-typeckd" checked name="nc[]" value="all">
+                                                    <input type="checkbox" class="cbx" id="333eat2-typeckd" checked name="nc[]" value="любое">
                                                     <label class="label-cbx" for="333eat2-typeckd">
                                                         <span class="cbx-cnt">Любое питание</span>
                                                     </label>
@@ -532,17 +532,9 @@
                                     <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                         <div class="form-dropdown-stars__item ">
                                             <div class="rbt-block  ">
-                                                <input type="radio" name="333rating_0" class="rbt" value="all" id="333ratingckd" checked>
+                                                <input type="radio" name="333rating_0" class="rbt" value="любой рейтинг" id="333ratingckd" checked>
                                                 <label class="label-rbt" for="333ratingckd">
                                                     <span class="rbt-cnt  uppercase">Любой рейтинг</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-dropdown-stars__item ">
-                                            <div class="rbt-block  ">
-                                                <input type="radio" name="333rating_0" class="rbt " value="не важно" id="333rating1">
-                                                <label class="label-rbt" for="333rating1">
-                                                    <span class="rbt-cnt  uppercase">Не важно</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -1170,17 +1162,9 @@
                                     <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                         <div class="form-dropdown-stars__item ">
                                             <div class="rbt-block  ">
-                                                <input type="radio" name="333rating_1" class="rbt" value="all" id="333ratingckd_opt2" checked>
+                                                <input type="radio" name="333rating_1" class="rbt" value="любой рейтинг" id="333ratingckd_opt2" checked>
                                                 <label class="label-rbt" for="333ratingckd_opt2">
                                                     <span class="rbt-cnt  uppercase">Любой рейтинг</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-dropdown-stars__item ">
-                                            <div class="rbt-block  ">
-                                                <input type="radio" name="333rating_1" class="rbt " value="не важно" id="333rating1_opt2">
-                                                <label class="label-rbt" for="333rating1_opt2">
-                                                    <span class="rbt-cnt  uppercase">Не важно</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -1809,17 +1793,9 @@
                                     <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                         <div class="form-dropdown-stars__item ">
                                             <div class="rbt-block  ">
-                                                <input type="radio" name="333rating_2" class="rbt" value="all" id="333ratingckd_opt3" checked>
+                                                <input type="radio" name="333rating_2" class="rbt" value="любой рейтинг" id="333ratingckd_opt3" checked>
                                                 <label class="label-rbt" for="333ratingckd_opt3">
                                                     <span class="rbt-cnt  uppercase">Любой рейтинг</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-dropdown-stars__item ">
-                                            <div class="rbt-block  ">
-                                                <input type="radio" name="333rating_2" class="rbt " value="не важно" id="333rating1_opt3">
-                                                <label class="label-rbt" for="333rating1_opt3">
-                                                    <span class="rbt-cnt  uppercase">Не важно</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -2070,7 +2046,7 @@
                         <div class="formDirections__wrap">
 
                             <div class="formDirections__bottom" id="nutrition_select">
-                                <input type="checkbox" hidden class="cbx" name="nc[]" checked  value="all" id="nitrition_all">
+                                <input type="checkbox" hidden class="cbx" name="nc[]" checked  value="любое" id="nitrition_all">
                                 <div class="formDirections__bottom-blocks">
                                     <div class="form-dropdown-stars__item ">
                                         <div class="cbx-block    cbx-block--16 ">
@@ -2125,12 +2101,18 @@
             </div>
             <div class="tour-selection-wrap-in tour-selection-wrap-flex js-hotels" data-index="0">
                 <div class="tour-selection-field tour-selection-field--740">
-                    <div class="bth__inp-block js-show-formDirections  js-formDirections--big-mobile">
+                    <div class="bth__inp-block js-show-formDirections  js-formDirections--big-mobile js-add-error">
 
                         <span class="bth__inp-lbl">Добавить отель</span>
                         <span class="bth__inp">
 
                                 </span>
+                        <div class="hint-block hint-block--abs">
+                            <i class="fa fa-question-circle question-error" aria-hidden="true"></i>
+                            <div class="hint">
+                                <p class="bth__cnt">Выберите отель</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="formDirections formDirections--big-mobile w100p" style="display: none;">
                         <div class="formDirections__wrap w100p">
@@ -2161,12 +2143,18 @@
 
             <div class="tour-selection-wrap-in tour-selection-wrap-flex js-hotels js-show-add-hotel" data-index="1" style="display: none">
                 <div class="tour-selection-field tour-selection-field--740">
-                    <div class="bth__inp-block js-show-formDirections  js-formDirections--big-mobile">
+                    <div class="bth__inp-block js-show-formDirections  js-formDirections--big-mobile js-add-error">
 
                         <span class="bth__inp-lbl">Добавить отель</span>
                         <span class="bth__inp">
 
                                 </span>
+                        <div class="hint-block hint-block--abs">
+                            <i class="fa fa-question-circle question-error" aria-hidden="true"></i>
+                            <div class="hint">
+                                <p class="bth__cnt">Выберите отель</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="formDirections formDirections--big-mobile w100p" style="display: none;">
                         <div class="formDirections__wrap w100p">
@@ -2197,12 +2185,18 @@
 
             <div class="tour-selection-wrap-in tour-selection-wrap-flex js-hotels js-show-add-hotel" data-index="2" style="display: none">
                 <div class="tour-selection-field tour-selection-field--740">
-                    <div class="bth__inp-block js-show-formDirections  js-formDirections--big-mobile">
+                    <div class="bth__inp-block js-show-formDirections  js-formDirections--big-mobile js-add-error">
 
                         <span class="bth__inp-lbl">Добавить отель</span>
                         <span class="bth__inp">
 
                                 </span>
+                        <div class="hint-block hint-block--abs">
+                            <i class="fa fa-question-circle question-error" aria-hidden="true"></i>
+                            <div class="hint">
+                                <p class="bth__cnt">Выберите отель</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="formDirections formDirections--big-mobile w100p" style="display: none;">
                         <div class="formDirections__wrap w100p">

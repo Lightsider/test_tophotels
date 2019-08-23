@@ -126,10 +126,27 @@ $(document).ready(function () {
 
     // Переход ко второму шагу
     $("#js_to_step2").click(function (e) {
-        $(this).addClass("bth__loader--animate");
         let object = lsfw.ui.main.request;
         object.wh = $("#wishes").text();
         object.type = $("#type2").is(":checked") ? 2 : 1;
+
+        if(object.type == 2)
+        {
+            let blocks = $(".js-hotels:visible .bth__inp-block .bth__inp");
+            let errors = [];
+            $.each(blocks,function (index,block) {
+                if($(block).text().trim().length < 1)
+                    errors[index] = $(block);
+            });
+
+            if(errors.length > 0)
+            {
+                showErrors(errors);
+                return false;
+            }
+            $(".js-hotels:visible .bth__inp-block").removeClass("has-error");
+        }
+        $(this).addClass("bth__loader--animate");
         //ajax
         $.ajax({
             url: "/send-hard-form-one-step",
@@ -396,6 +413,7 @@ $(document).ready(function () {
     });
 
     updateHotelsSelect($(".hotel-params-form").parents(".tour-selection-wrap-in:visible").find(".tour-selection-field"));
+    $("select").val("");
 })
 ;
 
