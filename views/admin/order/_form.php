@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Orders */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $consultant array */
 ?>
 
 <div class="orders-form">
@@ -44,6 +45,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'tourist_city')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'consultant')->dropDownList($consultant,[
+            "prompt" => "Не назначен"
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

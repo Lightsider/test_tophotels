@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'dir_city')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'dir_resort')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'dir_hotel')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'dir_stars')->textInput(['maxlength' => true]) ?>
 

@@ -47,7 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return StringHelper::truncate($model->text, 100);
                 }
             ],
-        ],
+            [
+                'attribute' => 'consultant',
+                'format' => 'text',
+                'value' => function ($model) {
+                    return $model->getConsultant()->name ?? "Не назначен";
+                }
+            ],
+        ]
     ]) ?>
 
 </div>

@@ -18,7 +18,7 @@ class m190823_062435_add_consultants_table extends Migration
             'email' => $this->string(255)->null(),
             'dir_country' => $this->string(255)->null(),
             'dir_city' => $this->string(255)->null(),
-            'dir_resort' => $this->string(255)->null(),
+            'dir_hotel' => $this->string(255)->null(),
             'dir_stars' => $this->string(255)->null(),
         ]);
     }

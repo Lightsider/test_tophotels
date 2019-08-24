@@ -39,7 +39,9 @@ $config = [
             'on beforeExec' => function ($event) {
                 $queue = $event->sender;
                 $order = Orders::find()->where('id = :id', [':id' => $event->job->getOrder()->id])->one();
-                $event->job->setOrder($order);
+                if (!empty($order)) {
+                    $event->job->setOrder($order);
+                }
                 return true;
             }
         ],

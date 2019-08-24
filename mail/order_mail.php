@@ -40,7 +40,7 @@ use yii\helpers\Url;
                     </tr>
                     <tr>
                         <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 35px 30px 20px;text-align: center;">
-                            Здравствуйте!
+                            Здравствуйте, <?php echo Html::encode($order->getConsultant()->name)?>!
                         </td>
                     </tr>
                     <tr>

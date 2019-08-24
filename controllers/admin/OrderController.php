@@ -2,9 +2,11 @@
 
 namespace app\controllers\admin;
 
+use app\models\Consultants;
 use Yii;
 use app\models\Orders;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -44,6 +46,7 @@ class OrderController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'consultant' => ArrayHelper::map(Consultants::find()->all(),'id','name')
         ]);
     }
 
@@ -62,6 +65,7 @@ class OrderController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'consultant' => ArrayHelper::map(Consultants::find()->all(),'id','name')
         ]);
     }
 
@@ -82,6 +86,7 @@ class OrderController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'consultant' => ArrayHelper::map(Consultants::find()->all(),'id','name')
         ]);
     }
 

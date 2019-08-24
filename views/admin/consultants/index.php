@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'dir_country',
             'dir_city',
-            'dir_resort',
+            'dir_hotel',
             'dir_stars',
 
             ['class' => 'yii\grid\ActionColumn'],

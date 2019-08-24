@@ -53,6 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return StringHelper::truncate($model->text, 30);
                 }
             ],
+            [
+                'attribute' => 'consultant',
+                'format' => 'text',
+                'value' => function ($model, $key, $index, $grid) {
+                    return $model->getConsultant()->name ?? "Не назначен";
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

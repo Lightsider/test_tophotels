@@ -206,6 +206,7 @@ class HardOrderFormOneStep extends Model
 
         }
 
+        $order->appointConsultant($this);
 
         $order->save();
 

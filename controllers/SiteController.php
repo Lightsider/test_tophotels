@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\jobs\MailDelayJob;
+use app\models\Consultants;
 use app\models\CustomOrderForm;
 use app\models\DictCity;
 use app\models\DictCountry;
@@ -80,10 +81,15 @@ class SiteController extends Controller
         $model = new HardOrderFormOneStep();
         if ($model->load(Yii::$app->getRequest()->getBodyParams(), '')) {
             if ($order = $model->saveOrder()) {
+                $consultant = Consultants::find()->where("id = :id",[":id" => $order->consultant])->one();
 
-                Yii::$app->queue->delay(2 * 60)->push(new MailDelayJob([
-                    'order' => $order,
-                ]));
+                if(!empty($consultant))
+                {
+                    Yii::$app->queue->delay(2)->push(new MailDelayJob([
+                        'order' => $order,
+                    ]));
+                }
+
 
                 return $this->asJson(["status" => "success", "id" => $order->id]);
             } else {

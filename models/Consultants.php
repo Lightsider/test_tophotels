@@ -12,7 +12,7 @@ use Yii;
  * @property string $email
  * @property string $dir_country
  * @property string $dir_city
- * @property string $dir_resort
+ * @property string $dir_hotel
  * @property string $dir_stars
  */
 class Consultants extends \yii\db\ActiveRecord
@@ -31,7 +31,7 @@ class Consultants extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'dir_country', 'dir_city', 'dir_resort', 'dir_stars'], 'string', 'max' => 255],
+            [['name', 'email', 'dir_country', 'dir_city', 'dir_hotel', 'dir_stars'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,7 +46,7 @@ class Consultants extends \yii\db\ActiveRecord
             'email' => 'Email',
             'dir_country' => 'Страна обслуживания',
             'dir_city' => 'Город обслуживания',
-            'dir_resort' => 'Курорт обслуживания',
+            'dir_hotel' => 'Отель обслуживания',
             'dir_stars' => 'Звездность обслуживания',
         ];
     }
