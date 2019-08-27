@@ -85,7 +85,7 @@ class SiteController extends Controller
 
                 if(!empty($consultant))
                 {
-                    Yii::$app->queue->delay(2)->push(new MailDelayJob([
+                    Yii::$app->queue->delay(2 * 60)->push(new MailDelayJob([
                         'order' => $order,
                     ]));
                 }
